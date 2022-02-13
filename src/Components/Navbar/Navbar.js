@@ -35,7 +35,7 @@ export default function Navbar() {
 function NavItem(props) {
 	let location = useLocation();
 	let className = "navbar-item";
-	if (location.pathname.split('/')[1] === props.to) {
+	if ('/' + location.pathname.split('/')[1] === props.to) {
 		className += " active";
 	}
 	return (
