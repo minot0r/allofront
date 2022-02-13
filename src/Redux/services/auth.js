@@ -3,7 +3,7 @@ import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
 
-const API_URL = "http://localhost:3000/auth/login";
+const API_URL = "http://api.giorgettivalentin.fr/auth/login";
 
 const AuthService = {
   login: (username, password) => {
