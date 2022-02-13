@@ -1,10 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import logo from "./logo.png";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Home/Home";
-import Login from "./Login/Login";
-import { KimonoHello, KimonoImage, KimonoModal } from "./Components/Kimono";
+import { KimonoAuthed, KimonoModal } from "./Components/Kimono";
 import Cookies from "universal-cookie";
 import { useSelector } from "react-redux";
 
@@ -16,8 +14,6 @@ function App() {
   const notifications = useSelector(
     (state) => state.notification.notifications
   );
-  const loggedIn = useSelector((state) => state.auth.loggedIn);
-  const name = useSelector((state) => state.auth.user?.name);
 
   return (
     <div className="app-container">
@@ -35,7 +31,7 @@ function App() {
           <div className="messages">
             {notifications.map((message, index) => (
               <KimonoModal
-                disappear={5}
+                disappear={message.duration || 5}
                 key={index}
                 type={message.type}
                 show={true}
@@ -47,16 +43,11 @@ function App() {
           </div>
         )}
         <Navbar />
-        {!loggedIn ? (
-          <Login />
-        ) : (
-          <>
-            <KimonoHello name={name} />
-            <KimonoImage img={logo} />
-          </>
-        )}
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/allos" element={<KimonoAuthed />} />
+          <Route path="/shop" element={<KimonoAuthed />} />
+          <Route path="/bde" element={<KimonoAuthed />} />
         </Routes>
       </div>
     </div>

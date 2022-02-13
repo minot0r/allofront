@@ -37,6 +37,21 @@
     height: auto;
     -webkit-appearance: none;
     transition: all .3s;
+    text-decoration: none;
+    text-align: center;
+}
+
+.kimono-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.kimono-buttons .kimono-button {
+    width: auto;
+    margin: 10px 10px;
 }
 
 .kimono-button.loading {
@@ -62,6 +77,68 @@
 .kimono-image img {
     width: 100%;
     object-fit: cover;
+}
+
+.kimono-box {
+    width: calc(100% - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+    -webkit-box-shadow: 1px 2px 9px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 2px 9px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px;
+    -webkit-appearance: none;
+    text-decoration: none;
+    transition: all .3s;
+}
+
+.kimono-box:hover {
+    -webkit-box-shadow: 1px 2px 19px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 2px 19px 0px rgba(0, 0, 0, 0.2);
+}
+
+.kimono-box-title * {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0;
+    text-decoration: underline;
+}
+
+.kimono-box-content {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.kimono-box-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+}
+
+.kimono-joke {
+    width: 80%;
+    margin: 100px auto;
+}
+
+.kimono-joke h1.citation {
+    margin: 50px 0;
+}
+
+.kimono-joke h1.citation::after {
+    content: "J.F. Tassin";
+    font-size: 1rem;
+    opacity: 0.5;
+    position: absolute;
+    transform: translate(-60%, 2rem)
+}
+
+.kimono-center {
+    margin: 50px auto;
 }
 
 .kimono-modal  {
@@ -95,6 +172,11 @@
 
 .kimono-modal.warning {
     background-color: var(--warning-lite);
+    color: white;
+}
+
+.kimono-modal.info {
+    background-color: var(--primary-lite);
     color: white;
 }
 
@@ -154,5 +236,14 @@
         top: 0px;
         transform: none;
         padding: 10px;
+    }
+
+    .kimono-buttons {
+        flex-direction: column;
+    }
+
+    .kimono-buttons .kimono-button {
+        width: 100%;
+        margin: 5px 0;
     }
 }
