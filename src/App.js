@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Home/Home";
-import { KimonoAuthed, KimonoModal } from "./Components/Kimono";
+import { KimonoAuthed, KimonoConstruct, KimonoModal } from "./Components/Kimono";
 import Cookies from "universal-cookie";
 import { useSelector } from "react-redux";
 import Allos from "./Allos/Allos";
@@ -47,8 +47,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/allos" element={<Allos />} />
-          <Route path="/shop" element={<KimonoAuthed />} />
-          <Route path="/bde" element={<KimonoAuthed />} />
+          <Route path="/shop" element={<KimonoConstruct />} />
+          <Route path="/bde" element={<KimonoConstruct />} />
         </Routes>
       </div>
     </div>

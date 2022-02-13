@@ -12,6 +12,7 @@ import KimonoAuthed from "./KimonoAuthed";
 import KimonoJoke from "./KimonoJoke";
 import KimonoCenter from "./KimonoCenter";
 import KimonoLoading from "./KimonoLoading";
+import KimonoConstruct from "./KimonoConstruct";
 
 export {
   KimonoInput,
@@ -28,4 +29,5 @@ export {
   KimonoJoke,
   KimonoCenter,
   KimonoLoading,
+  KimonoConstruct,
 };
