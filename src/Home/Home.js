@@ -5,8 +5,6 @@ import {
   KimonoHello,
   KimonoImage,
   KimonoJoke,
-  KimonoCenter,
-  KimonoBox,
 } from "../Components/Kimono";
 import logo from "../logo.png";
 import { useSelector } from "react-redux";
@@ -25,7 +23,7 @@ export default function Home() {
       ) : (
         <KimonoJoke />
       )}
-      
+
       <KimonoNavBox className={"success-bg"} title="Allos 📳" to={"/allos"}>
         <p>Découvrir les allos que vous propose notre liste 📲</p>
       </KimonoNavBox>
