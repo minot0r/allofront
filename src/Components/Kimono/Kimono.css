@@ -70,12 +70,14 @@
 }
 
 .kimono-hello {
-    margin: 20px;
+    margin: 100px 20px;
     -webkit-appearance: none;
 }
 
 .kimono-image {
-    width: 100%;
+    width: 80%;
+    max-width: 300px;
+    margin: auto;
     -webkit-appearance: none;
 }
 
@@ -294,5 +296,10 @@
     .kimono-buttons .kimono-button {
         width: 100%;
         margin: 5px 0;
+    }
+
+    .kimono-hello {
+        margin: 40px 20px;
+        -webkit-appearance: none;
     }
 }

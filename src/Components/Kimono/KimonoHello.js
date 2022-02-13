@@ -39,11 +39,11 @@ export default function KimonoHello(props) {
   };
   return (
     <div className={"kimono-hello " + (className || "")} {...rest}>
-      <h1>Bonjour {name}!</h1>
-      <h3>Merci de soutenir Kimonodvie 🙏</h3>
+      <h1>Bonjour <span className="danger-bg">{name}</span>!</h1>
+      <h3><span className="primary">Merci de soutenir Kimonodvie</span> 🙏</h3>
       <p>
         Pour te remercier, nous t'avons créé un nom de personnage :{" "}
-        <strong>{createName(name)}</strong>
+        <strong><span className="success-bg">{createName(name)}</span></strong>
       </p>
     </div>
   );

@@ -10,6 +10,10 @@ import "./index.css";
 
 import App from "./App";
 
+import { getAllos } from "./Redux/reducers/allos";
+
+store.dispatch(getAllos);
+
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>

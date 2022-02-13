@@ -17,8 +17,8 @@ export default function Home() {
     <div className="home-container">
       {loggedIn ? (
         <>
-          <KimonoHello name={name} />
           <KimonoImage img={logo} />
+          <KimonoHello name={name} />
         </>
       ) : (
         <KimonoJoke />

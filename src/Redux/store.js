@@ -10,7 +10,7 @@ let store = createStore(
     combineReducers({
         auth: authReducer,
         notification: notificationReducer,
-        allosReducer
+        allos: allosReducer
     }),
     {},
     composeWithDevTools(applyMiddleware(createLogger(), thunk))
