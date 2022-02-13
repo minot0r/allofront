@@ -11,6 +11,7 @@ import KimonoNavBox from "./KimonoNavBox";
 import KimonoAuthed from "./KimonoAuthed";
 import KimonoJoke from "./KimonoJoke";
 import KimonoCenter from "./KimonoCenter";
+import KimonoLoading from "./KimonoLoading";
 
 export {
   KimonoInput,
@@ -26,4 +27,5 @@ export {
   KimonoAuthed,
   KimonoJoke,
   KimonoCenter,
+  KimonoLoading,
 };

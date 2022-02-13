@@ -11,7 +11,7 @@ export default function KimonoJoke(props) {
   const dispatch = useDispatch();
   return (
     <div className={"kimono-joke " + (className || "")} {...rest}>
-      <h1 className="citation">« En 2023, je vote Kimonodvie »</h1>
+      <h1 className="citation">« Pour l'ENSIM, je vote Kimonodvie »</h1>
       <h1 className="success">
         Faites comme Jean-François et votez Kimonodvie pour 2023 🗳️
       </h1>
@@ -22,7 +22,7 @@ export default function KimonoJoke(props) {
             dispatch({
               type: ADD_NOTIFICATION,
               payload: createMessage(
-                "Merci pour ton vote 💜",
+                "Merci pour ton soutien 💜",
                 "On espère que le jour des éléctions tu seras à la hauteur !",
                 { type: "info", duration: 15 }
               ),
@@ -30,7 +30,7 @@ export default function KimonoJoke(props) {
             setClicked(true);
           }}
         >
-          Je vote Kimonodvie 💜
+          Je suis d'accord avec Mr. Tassin 💜
         </KimonoButton>
       )}
     </div>

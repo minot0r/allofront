@@ -5,6 +5,7 @@ import Home from "./Home/Home";
 import { KimonoAuthed, KimonoModal } from "./Components/Kimono";
 import Cookies from "universal-cookie";
 import { useSelector } from "react-redux";
+import Allos from "./Allos/Allos";
 
 const cookies = new Cookies();
 let cookiesAccepted = cookies.get("accept_cookies") !== undefined;
@@ -45,7 +46,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/allos" element={<KimonoAuthed />} />
+          <Route path="/allos" element={<Allos />} />
           <Route path="/shop" element={<KimonoAuthed />} />
           <Route path="/bde" element={<KimonoAuthed />} />
         </Routes>

@@ -62,6 +62,10 @@ export function login(username, password) {
     await new Promise((res) => setTimeout(res, 1000));
     try {
       const response = await AuthService.login(username, password);
+      if (!response) {
+        dispatch({ type: LOGIN_FAILURE });
+        return;
+      }
       if (!response.success) {
         dispatch({
           type: ADD_NOTIFICATION,
@@ -94,7 +98,6 @@ export function login(username, password) {
         ),
       });
     } catch {
-      dispatch({ type: LOGIN_FAILURE });
       dispatch({
         type: ADD_NOTIFICATION,
         payload: createMessage(
@@ -103,7 +106,6 @@ export function login(username, password) {
           { type: "danger" }
         ),
       });
-      return;
     }
   };
 }

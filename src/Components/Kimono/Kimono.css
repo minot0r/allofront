@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Karasha';
+    src: url('./Karasha.otf') format('opentype');
+}
+
 .kimono-input {
     width: 100%;
     padding: 20px 10px ;
@@ -140,6 +145,49 @@
 .kimono-center {
     margin: 50px auto;
 }
+
+.kimono-loading {
+    display: flex;
+    justify-content: center;
+}
+
+.kimono-loading .kimono-svg {
+    width: 100%;
+}
+
+.kimono-loading .kimono-svg text{
+    text-transform: uppercase;
+    animation: animateSVG 3s infinite alternate;
+    stroke-width: 2;
+    font-size: 40px;
+    font-family: Karasha;
+}
+
+@keyframes animateSVG {
+    0% {
+        fill: none;
+        stroke: var(--danger);
+        stroke-dashoffset: 25%;
+        stroke-dasharray: 0 50%;
+        stroke-width: 1;
+    }
+    70% {
+        fill: none;
+        stroke: var(--danger);
+    }
+    80% {
+        fill: none;
+        stroke: var(--primary);
+        stroke-width: 2;
+    }
+    100% {
+        fill: var(--primary);
+        stroke: var(--primary);
+        stroke-dashoffset: -25%;
+        stroke-dasharray: 50% 0;
+        stroke-width: 0;
+    }
+  }
 
 .kimono-modal  {
     display: block;

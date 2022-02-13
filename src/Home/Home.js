@@ -28,15 +28,15 @@ export default function Home() {
         <p>Découvrir les allos que vous propose notre liste 📲</p>
       </KimonoNavBox>
       <KimonoNavBox
-        className={"warning-bg"}
+        className={"danger-bg"}
         title="La liste 📒"
         to={"/bde"}
         footer={
           <KimonoButtons>
-            <KimonoLink className={"warning-bg"} to={"/bde#members"}>
+            <KimonoLink className={"danger-bg"} to={"/bde#members"}>
               Voir les membres 📝
             </KimonoLink>
-            <KimonoLink className={"success-bg"} to={"/bde#program"}>
+            <KimonoLink className={"danger-bg"} to={"/bde#program"}>
               Voir le programme 📅
             </KimonoLink>
           </KimonoButtons>

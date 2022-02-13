@@ -3,7 +3,7 @@ import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
 
-const API_URL = "http://api.giorgettivalentin.fr/auth/login";
+const API_URL = "https://kimonodvie-alloservice.herokuapp.com/auth/login";
 
 const AuthService = {
   login: (username, password) => {
