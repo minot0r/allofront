@@ -100,6 +100,7 @@
     -webkit-appearance: none;
     text-decoration: none;
     transition: all .3s;
+    color: black;
 }
 
 .kimono-box:hover {
