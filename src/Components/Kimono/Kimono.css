@@ -161,22 +161,23 @@
     stroke-width: 2;
     font-size: 40px;
     font-family: Karasha;
+    fill: transparent;
 }
 
 @keyframes animateSVG {
     0% {
-        fill: none;
+        fill: transparent;
         stroke: var(--danger);
         stroke-dashoffset: 25%;
         stroke-dasharray: 0 50%;
         stroke-width: 1;
     }
     70% {
-        fill: none;
+        fill: transparent;
         stroke: var(--danger);
     }
     80% {
-        fill: none;
+        fill: transparent;
         stroke: var(--primary);
         stroke-width: 2;
     }
