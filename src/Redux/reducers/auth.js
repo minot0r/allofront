@@ -2,11 +2,11 @@ import Cookies from "universal-cookie";
 import AuthService from "../services/auth";
 import { createMessage } from "../services/message";
 
-import store from "../store";
 import { ADD_NOTIFICATION } from "./notification";
 
 const LOGIN_SUCCESS = "auth/LoginSuccess";
 const LOGIN_FAILURE = "auth/LoginFailure";
+const LOGIN_LOADING = "auth/LoginLoading";
 
 const cookies = new Cookies();
 
@@ -19,11 +19,13 @@ const initialState =
         loggedIn: true,
         user: user,
         token: token,
+        loading: false,
       }
     : {
         loggedIn: false,
         user: null,
         token: null,
+        loading: false,
       };
 
 export const authReducer = (state = initialState, action) => {
@@ -34,6 +36,7 @@ export const authReducer = (state = initialState, action) => {
         loggedIn: true,
         user: action.payload.user,
         token: action.payload.token,
+        loading: false,
       };
       break;
     case LOGIN_FAILURE:
@@ -41,45 +44,66 @@ export const authReducer = (state = initialState, action) => {
         loggedIn: false,
         user: null,
         token: null,
+        loading: false,
       };
       break;
+    case LOGIN_LOADING:
+      state = {
+        ...state,
+        loading: action.payload,
+      };
   }
   return state;
 };
 
 export function login(username, password) {
   return async (dispatch) => {
-    const response = await AuthService.login(username, password);
-    if (!response.success) {
+    dispatch({ type: LOGIN_LOADING, payload: true });
+    await new Promise((res) => setTimeout(res, 1000));
+    try {
+      const response = await AuthService.login(username, password);
+      if (!response.success) {
+        dispatch({
+          type: ADD_NOTIFICATION,
+          payload: createMessage(
+            "Connexion échouée",
+            "Nom d'utilisateur ou mot de passe invalide 😞",
+            { type: "danger" }
+          ),
+        });
+        dispatch({
+          type: LOGIN_FAILURE,
+        });
+        return;
+      }
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: {
+          user: response.user,
+          token: response.token,
+        },
+      });
       dispatch({
         type: ADD_NOTIFICATION,
         payload: createMessage(
-          "Connexion échouée",
-          "Nom d'utilisateur ou mot de passe invalide :(",
+          "Connexion réussie",
+          `Bienvenue ${response.user.name} 👋`,
+          {
+            type: "success",
+          }
+        ),
+      });
+    } catch {
+      dispatch({ type: LOGIN_FAILURE });
+      dispatch({
+        type: ADD_NOTIFICATION,
+        payload: createMessage(
+          "Erreur 😞",
+          "Impossible de se connecter au serveur d'authentification",
           { type: "danger" }
         ),
       });
-      dispatch({
-        type: LOGIN_FAILURE,
-      });
       return;
     }
-    dispatch({
-      type: LOGIN_SUCCESS,
-      payload: {
-        user: response.user,
-        token: response.token,
-      },
-    });
-    dispatch({
-      type: ADD_NOTIFICATION,
-      payload: createMessage(
-        "Connexion réussie",
-        `Bienvenue ${response.user.name}!`,
-        {
-          type: "success",
-        }
-      ),
-    });
   };
 }

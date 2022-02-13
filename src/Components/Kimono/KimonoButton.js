@@ -1,12 +1,13 @@
 import "./Kimono.css";
 
 export default function KimonoButton(props) {
-  const { className, wrapWith, ...rest } = props;
+  const { className, wrapWith, loading, ...rest } = props;
+  const button = <button disabled={loading} className={"kimono-button " + (className || "")} {...rest} />
   return wrapWith ? (
     <wrapWith>
-      <button className={"kimono-button " + (className ? className : "")} {...rest} />
+      {button}
     </wrapWith>
   ) : (
-    <button className={"kimono-button " + (className ? className : "")} {...rest} />
+    {button}
   );
 }

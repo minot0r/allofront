@@ -11,3 +11,54 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --danger: #df7373;
+  --success: #4b8f8c;
+  --primary: #647191;
+  --warning: #efbd49;
+  --danger-lite: #df73737F;
+  --success-lite: #4b8f8c7f;
+  --primary-lite: #6471917f;
+  --warning-lite: #efbd497f;
+}
+
+.danger {
+  color: var(--danger);
+}
+
+.danger-bg {
+  background-color: var(--danger-lite) !important;
+  color: white !important;
+}
+
+.success {
+  color: var(--success) !important;
+}
+
+.success-bg {
+  background-color: var(--success-lite) !important;
+  color: white !important;
+}
+
+.primary {
+  color: var(--primary) !important;
+}
+
+.primary-bg {
+  background-color: var(--primary-lite) !important;
+  color: white !important;
+}
+
+.warning {
+  color: var(--warning) !important;
+}
+
+.warning-bg {
+  background-color: var(--warning-lite) !important;
+  color: white !important;
+}
+
+.danger-bg, .primary-bg, .warning-bg, .success-bg {
+  backdrop-filter: blur(5px);
+}

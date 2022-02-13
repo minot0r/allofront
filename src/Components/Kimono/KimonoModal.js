@@ -18,7 +18,7 @@ export default function KimonoModal(props) {
       onClick={() => setShowed(false)}
       className={
         "kimono-modal " +
-        (className ? className : "") +
+        (className || "") +
         (!showed ? " hidden" : "") +
         (type ? ` ${type}` : "")
       }

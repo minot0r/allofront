@@ -38,7 +38,7 @@ export default function KimonoHello(props) {
     return `${prefix} ${name}`;
   };
   return (
-    <div className={"kimono-hello " + (className ? className : "")} {...rest}>
+    <div className={"kimono-hello " + (className || "")} {...rest}>
       <h1>Bonjour {name}!</h1>
       <h3>Merci de soutenir Kimonodvie 🙏</h3>
       <p>

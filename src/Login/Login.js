@@ -18,7 +18,7 @@ export default function Login() {
         <h1 className="login-header-title">
           {loggedIn
             ? `Bienvenue ${user.name}!`
-            : "Vous n'êtes pas encore connecté :("}
+            : "Vous n'êtes pas encore connecté 😞"}
         </h1>
       </div>
       <div className="login-form">
@@ -40,7 +40,7 @@ export default function Login() {
               e.preventDefault();
               dispatch(login(username, password));
             }}
-            className="login-button"
+            className="primary-bg"
             value="Se connecter"
           />
         </form>

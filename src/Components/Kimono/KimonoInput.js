@@ -6,6 +6,6 @@ export default function KimonoInput(props) {
         ...rest
     } = props;
     return (
-        <input className={"kimono-input " + (className ? className : "")} {...rest} />
+        <input className={"kimono-input " + (className || "")} {...rest} />
     )
 }

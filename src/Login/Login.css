@@ -1,8 +1,9 @@
 .login-container {
-    text-align: center;
-}
-
-.login-form {
-
+    text-align: center;width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
 }
 
