@@ -5,15 +5,13 @@ import Home from "./Home/Home";
 import {
   KimonoConstruct,
   KimonoModal,
-  KimonoAuthed,
-  KimonoImage,
-  KimonoHello,
 } from "./Components/Kimono";
 import Cookies from "universal-cookie";
 import { useSelector } from "react-redux";
 import Allos from "./Allos/Allos";
 import Allo from "./Allos/Allo";
-import logo from "./logo.png";
+import Account from "./Account/Account";
+import Shortcut from "./Components/Shortcut/Shortcut";
 
 const cookies = new Cookies();
 let cookiesAccepted = cookies.get("accept_cookies") !== undefined;
@@ -23,7 +21,6 @@ function App() {
   const notifications = useSelector(
     (state) => state.notification.notifications
   );
-  const name = useSelector((state) => state.auth.user?.name);
   return (
     <div className="app-container">
       {!cookiesAccepted ? (
@@ -60,13 +57,11 @@ function App() {
           <Route
             path="/compte"
             element={
-              <KimonoAuthed>
-                <KimonoImage img={logo} />
-                <KimonoHello name={name} />
-              </KimonoAuthed>
+              <Account />
             }
           />
         </Routes>
+        <Shortcut />
       </div>
     </div>
   );

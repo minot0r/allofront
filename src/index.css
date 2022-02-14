@@ -60,6 +60,33 @@ code {
   }
 }
 
+.turn-slow {
+  animation: turn-slow 10s linear infinite;
+}
+
+.disappear-turn-slow {
+  animation: disappear-turn-slow 5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+@keyframes turn-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes disappear-turn-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    width: 0px;
+  }
+}
+
 .danger {
   color: var(--danger);
 }
@@ -96,6 +123,15 @@ code {
   color: white !important;
 }
 
-.danger-bg, .primary-bg, .warning-bg, .success-bg {
+.transparent-bg {
+  background-color: #ffffff7f !important;
+  color: black !important;
+}
+
+.danger-bg, .primary-bg, .warning-bg, .success-bg, .transparent-bg {
   backdrop-filter: blur(5px);
+}
+
+.danger-bg:visited, .primary-bg:visited, .warning-bg:visited, .success-bg:visited {
+  color: white !important;
 }

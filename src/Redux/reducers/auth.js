@@ -7,6 +7,7 @@ import { ADD_NOTIFICATION } from "./notification";
 const LOGIN_SUCCESS = "auth/LoginSuccess";
 const LOGIN_FAILURE = "auth/LoginFailure";
 const LOGIN_LOADING = "auth/LoginLoading";
+const LOGOUT = "auth/Logout";
 
 const cookies = new Cookies();
 
@@ -52,6 +53,14 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loading: action.payload,
       };
+      break;
+    case LOGOUT:
+      state = {
+        loggedIn: false,
+        user: null,
+        token: null,
+      };
+      break;
   }
   return state;
 };
@@ -107,5 +116,24 @@ export function login(username, password) {
         ),
       });
     }
+  };
+}
+
+export function logout() {
+  return async (dispatch) => {
+    AuthService.logout();
+    dispatch({
+      type: LOGOUT,
+    });
+    dispatch({
+      type: ADD_NOTIFICATION,
+      payload: createMessage(
+        "Déconnexion réussie",
+        "A bientôt 😊",
+        {
+          type: "success",
+        }
+      )
+    });
   };
 }
