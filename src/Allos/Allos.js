@@ -35,7 +35,7 @@ export default function Allos() {
               buttons={
                 <KimonoButtons>
                   <KimonoLink onClick={(e) => {
-                    if(allo.price < 0) {
+                    if(allo.price === 0) {
                       e.preventDefault();
                       e.stopPropagation();
                       window.location.href = `tel:0695450345`;
