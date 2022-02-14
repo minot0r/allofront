@@ -34,7 +34,13 @@ export default function Allos() {
               title={`${allo.name}`}
               buttons={
                 <KimonoButtons>
-                  <KimonoLink to={`/allos/${allo.id}/reserve`}
+                  <KimonoLink onClick={(e) => {
+                    if(allo.price < 0) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      window.location.href = `tel:0695450345`;
+                    }
+                  }} to={`/allos/${allo.id}/reserve`}
                     className={allo.price > 0 ? "success-bg" : "danger-bg"}
                   >
                     {allo.price > 0 ? "🍽️ Réserver" : "Voir le numéro"}
