@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Home/Home";
-import { KimonoAuthed, KimonoConstruct, KimonoModal } from "./Components/Kimono";
+import { KimonoConstruct, KimonoModal } from "./Components/Kimono";
 import Cookies from "universal-cookie";
 import { useSelector } from "react-redux";
 import Allos from "./Allos/Allos";
@@ -32,7 +32,7 @@ function App() {
           <div className="messages">
             {notifications.map((message, index) => (
               <KimonoModal
-                disappear={message.duration || 5}
+                disappear={message.duration || 5}
                 key={index}
                 type={message.type}
                 show={true}

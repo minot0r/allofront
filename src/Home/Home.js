@@ -31,7 +31,7 @@ export default function Home() {
         className={"danger-bg"}
         title="La liste 📒"
         to={"/bde"}
-        footer={
+        buttons={
           <KimonoButtons>
             <KimonoLink className={"danger-bg"} to={"/bde#members"}>
               Voir les membres 📝

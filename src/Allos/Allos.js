@@ -1,5 +1,12 @@
 import { useSelector, shallowEqual } from "react-redux";
-import { KimonoCenter, KimonoLoading, KimonoNavBox } from "../Components/Kimono";
+import {
+  KimonoBox,
+  KimonoButton,
+  KimonoButtons,
+  KimonoCenter,
+  KimonoLoading,
+  KimonoNavBox,
+} from "../Components/Kimono";
 import "./Allos.css";
 
 export default function Allos() {
@@ -18,10 +25,30 @@ export default function Allos() {
       </KimonoCenter>
       {!loading ? (
         <>
-          {allos.map((allos, index) => (
-            <KimonoNavBox key={index} to={`/allos/${allos.id}`} title={allos.name}>
-              <h3>{allos.description}</h3>
-              <h3>{allos.price}</h3>
+          {allos.map((allo, index) => (
+            <KimonoNavBox
+              className={allo.price > 0 ? "success-bg" : "danger-bg"}
+              icon={"📱"}
+              key={index}
+              to={`/allos/${allo.id}`}
+              title={`${allo.name}`}
+              buttons={
+                <KimonoButtons>
+                  <KimonoButton
+                    className={allo.price > 0 ? "success-bg" : "danger-bg"}
+                  >
+                    {allo.price > 0 ? "🍽️ Réserver" : "Voir le numéro"}
+                  </KimonoButton>
+                  <KimonoButton>📖 + d'informations</KimonoButton>
+                </KimonoButtons>
+              }
+              footer={
+                <h3>
+                  💰 {allo.price} €
+                </h3>
+              }
+            >
+              <p>{allo.description}</p>
             </KimonoNavBox>
           ))}
         </>
