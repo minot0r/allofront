@@ -24,6 +24,42 @@ code {
   --warning-lite: #efbd497f;
 }
 
+.kimono-bounce {
+  display: inline-block;
+  animation: bounce 10s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.kimono-bounce.two {
+  animation-delay: 3s;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  3% {
+    transform: translateY(-10px);
+  }
+  5% {
+    transform: translateY(0);
+  }
+  7% {
+    transform: translateY(0);
+  }
+  9% {
+    transform: translateY(-10px);
+  }
+  11% {
+    transform: translateY(0);
+  }
+  13% {
+    transform: translateY(-10px);
+  }
+  15% {
+    transform: translateY(0);
+  }
+}
+
 .danger {
   color: var(--danger);
 }

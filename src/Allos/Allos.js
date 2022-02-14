@@ -19,8 +19,8 @@ export default function Allos() {
         <h1>Coucou 👋</h1>
         <h3>
           Les allos payants sont marqués en{" "}
-          <span className="success-bg">VERT</span> et allos gratuits sont
-          marqués en <span className="danger-bg">ROUGE</span>
+          <span className="success-bg kimono-bounce">VERT</span> et allos gratuits sont
+          marqués en <span className="danger-bg kimono-bounce two">ROUGE</span>
         </h3>
       </KimonoCenter>
       {!loading ? (
