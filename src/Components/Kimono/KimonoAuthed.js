@@ -3,5 +3,6 @@ import Login from "../Login/Login";
 
 export default function KimonoAuthed({ children, reverse }) {
   let loggedIn = useSelector((state) => state.auth.loggedIn);
-  return loggedIn ? <>{children}</> : reverse ? null : <Login />;
+  if (reverse && loggedIn) return <>{children}</>;
+  return loggedIn ? <>{children}</> : <Login />;
 }
