@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { GET_ALLO } from "../Redux/reducers/allos";
 import { useParams } from "react-router-dom";
-import { KimonoButton, KimonoCenter } from "../Components/Kimono";
+import { KimonoButton, KimonoCenter, KimonoLink } from "../Components/Kimono";
 
 export default function Allo() {
   const params = useParams();
@@ -27,7 +27,7 @@ export default function Allo() {
               pour pouvoir y participer. Réserve un créneau dès maintenant !
             </p>
             <p>Il reste {allo.slotsLeft} créneaux libres</p>
-            <KimonoButton className={color}>Réserver un créneau ({allo.price}€)</KimonoButton>
+            <KimonoLink to={`/allos/${allo.id}/reserve`} className={color}>Réserver un créneau ({allo.price}€)</KimonoLink>
             </div>
           ) : (
             <p className={color}>
@@ -35,7 +35,7 @@ export default function Allo() {
               pour accèder à l'allo.
             </p>
           )}
-          <KimonoButton onClick={() => {
+          <KimonoButton className={"primary-bg"} onClick={() => {
               window.location.href = `tel:0695450345`;
           }}>Appeler le numéro { allo.price > 0 && "pour plus d'inforations" }</KimonoButton>
         </>

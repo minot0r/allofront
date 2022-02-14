@@ -2,11 +2,18 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Home/Home";
-import { KimonoConstruct, KimonoModal } from "./Components/Kimono";
+import {
+  KimonoConstruct,
+  KimonoModal,
+  KimonoAuthed,
+  KimonoImage,
+  KimonoHello,
+} from "./Components/Kimono";
 import Cookies from "universal-cookie";
 import { useSelector } from "react-redux";
 import Allos from "./Allos/Allos";
 import Allo from "./Allos/Allo";
+import logo from "./logo.png";
 
 const cookies = new Cookies();
 let cookiesAccepted = cookies.get("accept_cookies") !== undefined;
@@ -16,7 +23,7 @@ function App() {
   const notifications = useSelector(
     (state) => state.notification.notifications
   );
-
+  const name = useSelector((state) => state.auth.user?.name);
   return (
     <div className="app-container">
       {!cookiesAccepted ? (
@@ -47,10 +54,18 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/allos" element={<Allos />}/>
+          <Route path="/allos" element={<Allos />} />
           <Route path="/allos/:alloId" element={<Allo />} />
-          <Route path="/shop" element={<KimonoConstruct />} />
           <Route path="/bde" element={<KimonoConstruct />} />
+          <Route
+            path="/compte"
+            element={
+              <KimonoAuthed>
+                <KimonoImage img={logo} />
+                <KimonoHello name={name} />
+              </KimonoAuthed>
+            }
+          />
         </Routes>
       </div>
     </div>

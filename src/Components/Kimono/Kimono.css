@@ -26,6 +26,7 @@
 }
 
 .kimono-button {
+    display: inline-block;
     width: 100%;
     padding: 20px 10px ;
     margin: 10px 0;

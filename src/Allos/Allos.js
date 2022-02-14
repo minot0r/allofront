@@ -1,7 +1,7 @@
 import { useSelector, shallowEqual } from "react-redux";
 import {
-  KimonoBox,
   KimonoButton,
+  KimonoLink,
   KimonoButtons,
   KimonoCenter,
   KimonoLoading,
@@ -34,11 +34,11 @@ export default function Allos() {
               title={`${allo.name}`}
               buttons={
                 <KimonoButtons>
-                  <KimonoButton
+                  <KimonoLink to={`/allos/${allo.id}/reserve`}
                     className={allo.price > 0 ? "success-bg" : "danger-bg"}
                   >
                     {allo.price > 0 ? "🍽️ Réserver" : "Voir le numéro"}
-                  </KimonoButton>
+                  </KimonoLink>
                   <KimonoButton>📖 + d'informations</KimonoButton>
                 </KimonoButtons>
               }

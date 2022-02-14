@@ -2,28 +2,14 @@ import {
   KimonoButtons,
   KimonoLink,
   KimonoNavBox,
-  KimonoHello,
-  KimonoImage,
   KimonoJoke,
 } from "../Components/Kimono";
-import logo from "../logo.png";
-import { useSelector } from "react-redux";
 import "./Home.css";
 
 export default function Home() {
-  const loggedIn = useSelector((state) => state.auth.loggedIn);
-  const name = useSelector((state) => state.auth.user?.name);
   return (
     <div className="home-container">
-      {loggedIn ? (
-        <>
-          <KimonoImage img={logo} />
-          <KimonoHello name={name} />
-        </>
-      ) : (
-        <KimonoJoke />
-      )}
-
+      <KimonoJoke />
       <KimonoNavBox className={"success-bg"} title="Allos 📳" to={"/allos"}>
         <p>Découvrir les allos que vous propose notre liste 📲</p>
       </KimonoNavBox>

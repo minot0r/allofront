@@ -18,12 +18,12 @@ export default function Navbar() {
       text: "Allos",
     }),
     NavItem({
-      to: "/shop",
-      text: "Shop",
-    }),
-    NavItem({
       to: "/bde",
       text: "La Liste",
+    }),
+    NavItem({
+      to: "/compte",
+      text: "Mon compte",
     }),
   ];
 
