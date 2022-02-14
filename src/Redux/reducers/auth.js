@@ -7,7 +7,7 @@ import { ADD_NOTIFICATION } from "./notification";
 
 const LOGIN_SUCCESS = "auth/LoginSuccess";
 const LOGIN_FAILURE = "auth/LoginFailure";
-const LOGIN_LOADING = "auth/LoginLoading";
+const LOADING = "auth/Loading";
 const LOGOUT = "auth/Logout";
 
 const cookies = new Cookies();
@@ -49,7 +49,7 @@ export const authReducer = (state = initialState, action) => {
         loading: false,
       };
       break;
-    case LOGIN_LOADING:
+    case LOADING:
       state = {
         ...state,
         loading: action.payload,
@@ -68,7 +68,7 @@ export const authReducer = (state = initialState, action) => {
 
 export function login(username, password) {
   return async (dispatch) => {
-    dispatch({ type: LOGIN_LOADING, payload: true });
+    dispatch({ type: LOADING, payload: true });
     await new Promise((res) => setTimeout(res, 1000));
     try {
       const response = await AuthService.login(username, password);

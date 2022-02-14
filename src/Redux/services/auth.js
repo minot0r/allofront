@@ -3,12 +3,12 @@ import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
 
-const API_URL = "https://kimonodvie-alloservice.herokuapp.com/auth/login";
+const API_URL = "https://kimonodvie-alloservice.herokuapp.com/auth";
 
 const AuthService = {
   login: (username, password) => {
     return axios
-      .post(API_URL, {
+      .post(`${API_URL}/login`, {
         username,
         password,
       })
@@ -28,6 +28,22 @@ const AuthService = {
   },
   logout: () => {
     cookies.remove("token");
+  },
+  available: (username) => {
+    return axios.post(`${API_URL}/available`, { username }).then((response) => {
+      return response.data;
+    });
+  },
+  register(name, username, password) {
+    return axios
+      .post(`${API_URL}/register`, {
+        name,
+        username,
+        password,
+      })
+      .then((response) => {
+        return response.data;
+      });
   },
 };
 

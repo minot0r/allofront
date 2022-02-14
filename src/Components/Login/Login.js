@@ -16,7 +16,7 @@ export default function Login() {
   return (
     <div className="login-container">
         <div className="login-header">
-          <h1 className="login-header-title">
+          <h1 className="login-header-title primary">
             {loggedIn
               ? `Bienvenue ${user.name}!`
               : "Vous n'êtes pas encore connecté 😞"}
