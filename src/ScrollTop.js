@@ -4,10 +4,7 @@ import { useLocation } from "react-router";
 const ScrollTop = (props) => {
   const location = useLocation();
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "auto",
-    });
+    window.scrollX = 0;
   }, [location]);
 
   return <>{props.children}</>;

@@ -5,11 +5,13 @@ import { ADD_NOTIFICATION } from "./notification";
 
 const ALL_ALLOS = "allos/AllAllos";
 const ALLOS_LOADING = "allos/AllosLoading";
+const GET_ALLO = "allos/GetAllo";
 
-export { ALL_ALLOS, ALLOS_LOADING };
+export { ALL_ALLOS, ALLOS_LOADING, GET_ALLO };
 
 const initialState = {
   allos: [],
+  allo: {},
   loading: false,
 };
 
@@ -21,6 +23,12 @@ export const allosReducer = (state = initialState, action) => {
         ...state,
         allos: action.payload,
         loading: false,
+      };
+      break;
+    case GET_ALLO:
+      state = {
+        ...state,
+        allo: state.allos.filter((allo) => allo.id === action.payload.id)[0],
       };
       break;
     case ALLOS_LOADING:

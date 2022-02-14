@@ -6,6 +6,7 @@ import { KimonoConstruct, KimonoModal } from "./Components/Kimono";
 import Cookies from "universal-cookie";
 import { useSelector } from "react-redux";
 import Allos from "./Allos/Allos";
+import Allo from "./Allos/Allo";
 
 const cookies = new Cookies();
 let cookiesAccepted = cookies.get("accept_cookies") !== undefined;
@@ -46,7 +47,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/allos" element={<Allos />} />
+          <Route path="/allos" element={<Allos />}/>
+          <Route path="/allos/:alloId" element={<Allo />} />
           <Route path="/shop" element={<KimonoConstruct />} />
           <Route path="/bde" element={<KimonoConstruct />} />
         </Routes>
