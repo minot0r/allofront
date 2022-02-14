@@ -16,7 +16,7 @@ export default function Allos() {
   return (
     <div className="allos-container">
       <KimonoCenter width={"80%"}>
-        <h1>Coucou 👋</h1>
+        <h1>AlLlllLOooO??? 🤙🤙🤙</h1>
         <h3>
           Les allos payants sont marqués en{" "}
           <span className="success-bg kimono-bounce">VERT</span> et allos gratuits sont

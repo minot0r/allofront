@@ -27,7 +27,7 @@ export default function Allo() {
               pour pouvoir y participer. Réserve un créneau dès maintenant !
             </p>
             <p>Il reste {allo.slotsLeft} créneaux libres</p>
-            <KimonoButton className={color}>Réserver un créneau</KimonoButton>
+            <KimonoButton className={color}>Réserver un créneau ({allo.price}€)</KimonoButton>
             </div>
           ) : (
             <p className={color}>
@@ -45,7 +45,9 @@ export default function Allo() {
           <p>
             Cet allo n'existe pas, ou plus. Enfin bref, retourne en lieu sûr.
           </p>
-          <KimonoButton to="/allos">Retour</KimonoButton>
+          <KimonoButton onClick={() => {
+              window.history.back();
+          }}>Retour</KimonoButton>
         </>
       )}
     </KimonoCenter>
