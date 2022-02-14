@@ -29,14 +29,6 @@ const AuthService = {
   logout: () => {
     cookies.remove("token");
   },
-  authHeader: () => {
-    const token = cookies.get("token");
-    if (token) {
-      return { Authorization: `Bearer ${token}` };
-    } else {
-      return {};
-    }
-  },
 };
 
 export default AuthService;

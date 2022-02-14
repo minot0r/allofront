@@ -13,7 +13,10 @@ import App from "./App";
 import { getAllos } from "./Redux/reducers/allos";
 import ScrollTop from "./ScrollTop";
 
-store.dispatch(getAllos);
+const state = store.getState()
+const loggedIn = state.auth.loggedIn
+
+store.dispatch(getAllos(loggedIn));
 
 ReactDOM.render(
   <Provider store={store}>

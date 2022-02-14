@@ -28,7 +28,8 @@ export const allosReducer = (state = initialState, action) => {
     case GET_ALLO:
       state = {
         ...state,
-        allo: state.allos.filter((allo) => allo.id === action.payload.id)[0],
+        allo: action.payload,
+        loading: false,
       };
       break;
     case ALLOS_LOADING:
@@ -41,22 +42,48 @@ export const allosReducer = (state = initialState, action) => {
   return state;
 };
 
-export async function getAllos(dispatch) {
-  dispatch({ type: ALLOS_LOADING, payload: true });
-  const response = await AllosService.getAllos();
-  if (!response.success) {
+export function getAllos(login) {
+  return async (dispatch, getState) => {
+    dispatch({ type: ALLOS_LOADING, payload: true });
+    const state = getState();
+    const response = await AllosService.getAllos(login, state.auth.token);
+    if (!response.success) {
+      dispatch({
+        type: ADD_NOTIFICATION,
+        payload: createMessage(
+          "Impossible de récuperer nos allos 😢",
+          "Réessaye plus tard",
+          { type: "danger", duration: 5000 }
+        ),
+      });
+      return;
+    }
     dispatch({
-      type: ADD_NOTIFICATION,
-      payload: createMessage(
-        "Impossible de récuperer nos allos 😢",
-        "Réessaye plus tard",
-        { type: "danger" }
-      ),
+      type: ALL_ALLOS,
+      payload: response.allos,
     });
-    return;
-  }
-  dispatch({
-    type: ALL_ALLOS,
-    payload: response.allos,
-  });
+  };
+}
+
+export function getAllo(id, login) {
+  return async (dispatch, getState) => {
+    dispatch({ type: ALLOS_LOADING, payload: true });
+    const state = getState();
+    const response = await AllosService.getAllo(id, login, state.auth.token);
+    if (!response.success) {
+      dispatch({
+        type: ADD_NOTIFICATION,
+        payload: createMessage(
+          "Impossible de récuperer cet allo 😢",
+          "Réessaye plus tard",
+          { type: "danger", duration: 5000 }
+        ),
+      });
+      return;
+    }
+    dispatch({
+      type: GET_ALLO,
+      payload: response.allo,
+    });
+  };
 }

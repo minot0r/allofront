@@ -1,6 +1,7 @@
 import Cookies from "universal-cookie";
 import AuthService from "../services/auth";
 import { createMessage } from "../services/message";
+import { getAllos } from "./allos";
 
 import { ADD_NOTIFICATION } from "./notification";
 
@@ -96,6 +97,7 @@ export function login(username, password) {
           token: response.token,
         },
       });
+      dispatch(getAllos(true));
       dispatch({
         type: ADD_NOTIFICATION,
         payload: createMessage(
