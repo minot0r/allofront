@@ -109,7 +109,7 @@ export default function Register({ open, setOpen }) {
                 onClick={(e) => {
                   e.preventDefault();
                   setRegistering(true);
-                  AuthService.register(username, password, name).then((res) => {
+                  AuthService.register(name, username, password).then((res) => {
                     if (!res.success) {
                       dispatch({
                         type: ADD_NOTIFICATION,
