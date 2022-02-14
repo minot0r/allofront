@@ -1,11 +1,11 @@
 import { useSelector, shallowEqual } from "react-redux";
 import {
   KimonoButton,
-  KimonoLink,
   KimonoButtons,
   KimonoCenter,
   KimonoLoading,
   KimonoNavBox,
+  KimonoAuthLink,
 } from "../Components/Kimono";
 import "./Allos.css";
 
@@ -34,7 +34,7 @@ export default function Allos() {
               title={`${allo.name}`}
               buttons={
                 <KimonoButtons>
-                  <KimonoLink onClick={(e) => {
+                  <KimonoAuthLink onClick={(e) => {
                     if(allo.price === 0) {
                       e.preventDefault();
                       e.stopPropagation();
@@ -44,7 +44,7 @@ export default function Allos() {
                     className={allo.price > 0 ? "success-bg" : "danger-bg"}
                   >
                     {allo.price > 0 ? "🍽️ Réserver" : "Voir le numéro"}
-                  </KimonoLink>
+                  </KimonoAuthLink>
                   <KimonoButton>📖 + d'informations</KimonoButton>
                 </KimonoButtons>
               }

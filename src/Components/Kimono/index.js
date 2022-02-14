@@ -13,6 +13,8 @@ import KimonoJoke from "./KimonoJoke";
 import KimonoCenter from "./KimonoCenter";
 import KimonoLoading from "./KimonoLoading";
 import KimonoConstruct from "./KimonoConstruct";
+import KimonoAuthButton from "./KimonoAuthButton";
+import KimonoAuthLink from "./KimonoAuthLink";
 
 export {
   KimonoInput,
@@ -30,4 +32,6 @@ export {
   KimonoCenter,
   KimonoLoading,
   KimonoConstruct,
+  KimonoAuthButton,
+  KimonoAuthLink,
 };
