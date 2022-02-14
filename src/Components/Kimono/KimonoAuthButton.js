@@ -12,7 +12,7 @@ export default function KimonoAuthButton(props) {
   } = props;
   const loggedIn = useSelector((state) => state.auth.loggedIn);
   if(!loggedIn) {
-    return <KimonoLink className={"danger-bg"}>
+    return <KimonoLink to={"/compte"} className={"danger-bg"}>
         🔒 Connectez-vous pour accèder
     </KimonoLink>
     }

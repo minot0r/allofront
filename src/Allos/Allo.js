@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { GET_ALLO } from "../Redux/reducers/allos";
 import { useParams } from "react-router-dom";
-import { KimonoAuthLink, KimonoButton, KimonoCenter } from "../Components/Kimono";
+import { KimonoAuthButton, KimonoAuthLink, KimonoButton, KimonoCenter } from "../Components/Kimono";
 
 export default function Allo() {
   const params = useParams();
@@ -35,9 +35,9 @@ export default function Allo() {
               pour accèder à l'allo.
             </p>
           )}
-          <KimonoAuthLink className={"primary-bg"} onClick={() => {
+          <KimonoAuthButton className={"primary-bg"} onClick={() => {
               window.location.href = `tel:0695450345`;
-          }}>Appeler le numéro { allo.price > 0 && "pour plus d'inforations" }</KimonoAuthLink>
+          }}>Appeler le numéro { allo.price > 0 && "pour plus d'inforations" }</KimonoAuthButton>
         </>
       ) : (
         <>
