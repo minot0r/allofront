@@ -136,6 +136,9 @@ export default function Register({ open, setOpen }) {
               onChange={() => {
                 const token = recaptchaRef.current.getValue();
                 AuthService.captchaVerify(token).then((res) => {
+                  if (!res.success) {
+                    recaptchaRef.current.reset();
+                  }
                   setCaptchaVerified(res.success);
                 });
               }}
