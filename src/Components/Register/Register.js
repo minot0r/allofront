@@ -8,7 +8,6 @@ import AuthService from "../../Redux/services/auth";
 import { createMessage } from "../../Redux/services/message";
 import {
   KimonoButton,
-  KimonoCenter,
   KimonoInput,
   KimonoLoading,
 } from "../Kimono";
@@ -132,7 +131,6 @@ export default function Register({ open, setOpen }) {
             {viewIsLow(password) ? (
               <span className="danger">Ton mot de passe est trop court</span>
             ) : null}
-            <KimonoCenter width={"50%"}>
               <ReCAPTCHA
                 sitekey="6LftlH0eAAAAABjqUuHtU2-g-cm21q9bvG4I6gD4"
                 ref={recaptchaRef}
@@ -152,7 +150,6 @@ export default function Register({ open, setOpen }) {
                   setCaptchaVerified(false);
                 }}
               />
-            </KimonoCenter>
             {!(
               usernameTaken ||
               !captchaVerified ||
