@@ -52,10 +52,6 @@ export default function Login() {
               value="Se connecter"
               loading={loading}
             />
-            <ReCAPTCHA
-              sitekey="6LeeuX0eAAAAACQw6NltUFDFbyClgzTNcviatQIE"
-              hl="fr"
-            />
           </form>
         </div>
     </div>
