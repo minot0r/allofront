@@ -6,11 +6,7 @@ import "react-google-recaptcha";
 import { ADD_NOTIFICATION } from "../../Redux/reducers/notification";
 import AuthService from "../../Redux/services/auth";
 import { createMessage } from "../../Redux/services/message";
-import {
-  KimonoButton,
-  KimonoInput,
-  KimonoLoading,
-} from "../Kimono";
+import { KimonoButton, KimonoInput, KimonoLoading } from "../Kimono";
 import { ReCAPTCHA } from "react-google-recaptcha";
 import "./Register.css";
 
@@ -131,25 +127,27 @@ export default function Register({ open, setOpen }) {
             {viewIsLow(password) ? (
               <span className="danger">Ton mot de passe est trop court</span>
             ) : null}
-              <ReCAPTCHA
-                sitekey="6LftlH0eAAAAABjqUuHtU2-g-cm21q9bvG4I6gD4"
-                ref={recaptchaRef}
-                render="explicit"
-                hl="fr"
-                grecaptcha={window.grecaptcha}
-                onChange={() => {
-                  const token = recaptchaRef.current.getValue();
-                  console.log(token);
-                }}
-                onExpired={() => {
-                  recaptchaRef.current.reset();
-                  setCaptchaVerified(false);
-                }}
-                onError={() => {
-                  recaptchaRef.current.reset();
-                  setCaptchaVerified(false);
-                }}
-              />
+            <ReCAPTCHA
+              sitekey="6LftlH0eAAAAABjqUuHtU2-g-cm21q9bvG4I6gD4"
+              ref={recaptchaRef}
+              render="explicit"
+              hl="fr"
+              grecaptcha={window.grecaptcha}
+              onChange={() => {
+                const token = recaptchaRef.current.getValue();
+                AuthService.captchaVerify(token).then((res) => {
+                  setCaptchaVerified(res.success);
+                });
+              }}
+              onExpired={() => {
+                recaptchaRef.current.reset();
+                setCaptchaVerified(false);
+              }}
+              onError={() => {
+                recaptchaRef.current.reset();
+                setCaptchaVerified(false);
+              }}
+            />
             {!(
               usernameTaken ||
               !captchaVerified ||
