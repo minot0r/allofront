@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import "react-spring-bottom-sheet/dist/style.css";
@@ -6,6 +6,7 @@ import { ADD_NOTIFICATION } from "../../Redux/reducers/notification";
 import AuthService from "../../Redux/services/auth";
 import { createMessage } from "../../Redux/services/message";
 import { KimonoButton, KimonoInput, KimonoLoading } from "../Kimono";
+import { ReCAPTCHA } from "react-google-recaptcha";
 import "./Register.css";
 
 export default function Register({ open, setOpen }) {
@@ -15,6 +16,9 @@ export default function Register({ open, setOpen }) {
   const [usernameTaken, setUsernameTaken] = useState(false);
   const [loading, setLoading] = useState(false);
   const [registering, setRegistering] = useState(false);
+  const [recaptcha, setRecaptcha] = useState("");
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+  const recaptchaRef = createRef();
   const dispatch = useDispatch();
 
   const isLow = (val) => {
@@ -30,10 +34,20 @@ export default function Register({ open, setOpen }) {
     if (!isLow(val)) return "success-bg";
   };
 
+  const getClassName = (val) => {
+    if (val.length === 0) return;
+    if (viewIsLow(val)) return "danger-bg";
+    if (val.indexOf(" ") === -1 || val.split(" ")[1]?.length < 1)
+      return "danger-bg";
+    if (!isLow(val)) return "success-bg";
+  };
+
   useEffect(() => {
     if (username != null)
       setUsername(username.replace(/[^a-zA-Z0-9_]/, "").toLowerCase());
-  }, [username, setUsername]);
+    if (name != null) setName(name.replace(/[^a-zA-Z0-9_ ]/, ""));
+  }, [username, setUsername, name, setName]);
+
   return (
     <BottomSheet
       open={open}
@@ -48,13 +62,20 @@ export default function Register({ open, setOpen }) {
             <KimonoInput
               type={"text"}
               value={name}
-              className={getClass(name)}
+              className={getClassName(name)}
               onChange={(e) => setName(e.target.value)}
-              placeholder={"Ton p'tit nom (ex: Némo Demarquay)"}
+              placeholder={"Ton p'tit nom (ex: Sandra Geffroi)"}
             />
             {viewIsLow(name) ? (
               <span className="danger">Ton nom est trop court</span>
-            ) : null}
+            ) : (
+              name.length > 0 &&
+              (name.indexOf(" ") === -1 || name.split(" ")[1]?.length < 1) && (
+                <span className="danger">
+                  Tu n'as pas encore marqué ton ptit nom en entier
+                </span>
+              )
+            )}
             <KimonoInput
               type={"text"}
               className={
@@ -104,7 +125,26 @@ export default function Register({ open, setOpen }) {
             {viewIsLow(password) ? (
               <span className="danger">Ton mot de passe est trop court</span>
             ) : null}
-            {!(usernameTaken || loading || isLow(name) || isLow(password)) && (
+            <ReCAPTCHA
+              sitekey="6LftlH0eAAAAABjqUuHtU2-g-cm21q9bvG4I6gD4"
+              ref={recaptchaRef}
+              onChange={() => setRecaptcha(recaptchaRef.current.getValue())}
+              onSubmit={() => {
+                AuthService.captchaVerify(recaptcha).then((res) => {
+                  setCaptchaVerified(res);
+                });
+              }}
+            />
+
+            {!(
+              usernameTaken ||
+              !captchaVerified ||
+              loading ||
+              isLow(name) ||
+              isLow(password) ||
+              name.indexOf(" ") === -1 ||
+              name.split(" ")[1]?.length < 1
+            ) && (
               <KimonoButton
                 onClick={(e) => {
                   e.preventDefault();
@@ -123,13 +163,13 @@ export default function Register({ open, setOpen }) {
                     }
                     setOpen(false);
                     dispatch({
-                        type: ADD_NOTIFICATION,
-                        payload: createMessage(
-                            "Ton compte a été créé 🤗",
-                            "Bienvenue dans l'équipe des Kimonodvie 🥷",
-                            { type: "success", duration: 15 }
-                        ),
-                    })
+                      type: ADD_NOTIFICATION,
+                      payload: createMessage(
+                        "Ton compte a été créé 🤗",
+                        "Bienvenue dans l'équipe des Kimonodvie 🥷",
+                        { type: "success", duration: 15 }
+                      ),
+                    });
                   });
                 }}
                 className={"success-bg"}

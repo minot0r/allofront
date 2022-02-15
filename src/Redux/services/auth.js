@@ -45,6 +45,12 @@ const AuthService = {
         return response.data;
       });
   },
+  captchaVerify: (token) => {
+    return axios.post(`${API_URL}/captchaverify`, { token }).then((response) => {
+      return response.data.success;
+    });
+  },
 };
+
 
 export default AuthService;
