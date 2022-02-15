@@ -11,6 +11,7 @@ import { logout } from "../Redux/reducers/auth";
 import "./Account.css";
 import logo from "../logo.png";
 import Register from "../Components/Register/Register";
+import KimonoNotAuthed from "../Components/Kimono/KimonoNotAuthed";
 
 export default function Account() {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ export default function Account() {
           Se déconnecter
         </KimonoButton>
       </KimonoAuthed>
-      <KimonoAuthed reverse>
+      <KimonoNotAuthed>
         <KimonoCenter tiny width={"80%"}>
           <KimonoButton
             onClick={() => {
@@ -42,7 +43,7 @@ export default function Account() {
           </KimonoButton>
         </KimonoCenter>
         <Register open={open} setOpen={setOpen} />
-      </KimonoAuthed>
+      </KimonoNotAuthed>
     </div>
   );
 }
