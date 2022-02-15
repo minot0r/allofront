@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ReCAPTCHA } from "react-google-recaptcha";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../Redux/reducers/auth";
 import { KimonoInput, KimonoLoading, KimonoSubmit } from "../Kimono";
@@ -50,6 +51,10 @@ export default function Login() {
               className="primary-bg"
               value="Se connecter"
               loading={loading}
+            />
+            <ReCAPTCHA
+              sitekey="6LeeuX0eAAAAACQw6NltUFDFbyClgzTNcviatQIE"
+              hl="fr"
             />
           </form>
         </div>

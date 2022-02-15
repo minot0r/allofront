@@ -1,7 +1,8 @@
-import { createRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import "react-spring-bottom-sheet/dist/style.css";
+import "react-google-recaptcha";
 import { ADD_NOTIFICATION } from "../../Redux/reducers/notification";
 import AuthService from "../../Redux/services/auth";
 import { createMessage } from "../../Redux/services/message";
@@ -16,9 +17,8 @@ export default function Register({ open, setOpen }) {
   const [usernameTaken, setUsernameTaken] = useState(false);
   const [loading, setLoading] = useState(false);
   const [registering, setRegistering] = useState(false);
-  const [recaptcha, setRecaptcha] = useState("");
   const [captchaVerified, setCaptchaVerified] = useState(false);
-  const recaptchaRef = createRef();
+  const recaptchaRef = useRef(null);
   const dispatch = useDispatch();
 
   const isLow = (val) => {
@@ -119,7 +119,9 @@ export default function Register({ open, setOpen }) {
               type={"password"}
               className={getClass(password)}
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
               placeholder={"Ton mot de passe secret"}
             />
             {viewIsLow(password) ? (
@@ -128,11 +130,18 @@ export default function Register({ open, setOpen }) {
             <ReCAPTCHA
               sitekey="6LftlH0eAAAAABjqUuHtU2-g-cm21q9bvG4I6gD4"
               ref={recaptchaRef}
-              onChange={() => setRecaptcha(recaptchaRef.current.getValue())}
-              onSubmit={() => {
-                AuthService.captchaVerify(recaptcha).then((res) => {
+              render="explicit"
+              hl="fr"
+              grecaptcha={window.grecaptcha}
+              onChange={() => {
+                const token = recaptchaRef.current.getValue();
+                AuthService.captchaVerify(token).then((res) => {
                   setCaptchaVerified(res);
                 });
+              }}
+              onExpired={() => {
+                recaptchaRef.current.reset();
+                setCaptchaVerified(false);
               }}
             />
 
