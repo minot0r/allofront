@@ -36,7 +36,7 @@ export default function Allo() {
               </p>
               <p>Il reste {allo.slotsLeft} créneaux libres</p>
               <KimonoAuthLink
-                to={`/allos/${allo.id}/reserve`}
+                to={`/allos/${allo.id}/slots`}
                 className={color}
               >
                 Réserver un créneau ({allo.price}€)

@@ -14,7 +14,7 @@ import { getAllos } from "./Redux/reducers/allos";
 import ScrollTop from "./ScrollTop";
 
 const state = store.getState()
-const loggedIn = state.auth.loggedIn
+const loggedIn = state.auth.loggedIn;
 
 store.dispatch(getAllos(loggedIn));
 

@@ -18,9 +18,11 @@ export default function Allos() {
       <KimonoCenter width={"80%"}>
         <h1>AlLlllLOooO??? 🤙🤙🤙</h1>
         <h3>
-          Les allos payants sont marqués en{" "}
-          <span className="success-bg kimono-bounce">VERT</span> et allos gratuits sont
-          marqués en <span className="danger-bg kimono-bounce two">ROUGE</span>
+          Kimonodvie te propose ses services les "allos", alors{" "}
+          <span className="success-bg kimono-bounce">APPELLE</span> nous dès
+          maintenant ou{" "}
+          <span className="danger-bg kimono-bounce two">RESERVE</span> ton
+          créneau pour un service à venir!
         </h3>
       </KimonoCenter>
       {!loading ? (
@@ -34,13 +36,15 @@ export default function Allos() {
               title={`${allo.name}`}
               buttons={
                 <KimonoButtons>
-                  <KimonoAuthLink onClick={(e) => {
-                    if(allo.price === 0) {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      window.location.href = `tel:0695450345`;
-                    }
-                  }} to={`/allos/${allo.id}/reserve`}
+                  <KimonoAuthLink
+                    onClick={(e) => {
+                      if (allo.price === 0) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.location.href = `tel:0695450345`;
+                      }
+                    }}
+                    to={`/allos/${allo.id}/slots`}
                     className={allo.price > 0 ? "success-bg" : "danger-bg"}
                   >
                     {allo.price > 0 ? "🍽️ Réserver" : "Voir le numéro"}
@@ -48,11 +52,7 @@ export default function Allos() {
                   <KimonoButton>📖 + d'informations</KimonoButton>
                 </KimonoButtons>
               }
-              footer={
-                <h3>
-                  💰 {allo.price} €
-                </h3>
-              }
+              footer={allo.price > 0 && <h3>💰 {allo.price} €</h3>}
             >
               <p>{allo.description}</p>
             </KimonoNavBox>

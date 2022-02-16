@@ -1,5 +1,6 @@
 import AllosService from "../services/allos";
 import { createMessage } from "../services/message";
+import { LOGOUT } from "./auth";
 
 import { ADD_NOTIFICATION } from "./notification";
 
@@ -46,22 +47,37 @@ export function getAllos(login) {
   return async (dispatch, getState) => {
     dispatch({ type: ALLOS_LOADING, payload: true });
     const state = getState();
-    const response = await AllosService.getAllos(login, state.auth.token);
-    if (!response.success) {
+    try {
+      const response = await AllosService.getAllos(login, state.auth.token);
+      if (!response.success) {
+        dispatch({
+          type: ADD_NOTIFICATION,
+          payload: createMessage(
+            "Impossible de récuperer nos allos 😢",
+            "Réessaye plus tard",
+            { type: "danger", duration: 5000 }
+          ),
+        });
+        return;
+      }
+      dispatch({
+        type: ALL_ALLOS,
+        payload: response.allos,
+      });
+    } catch {
+      dispatch({
+        type: LOGOUT,
+      });
       dispatch({
         type: ADD_NOTIFICATION,
         payload: createMessage(
-          "Impossible de récuperer nos allos 😢",
-          "Réessaye plus tard",
+          "Vous avez été déconnecté 😢",
+          "Votre session a expiré",
           { type: "danger", duration: 5000 }
         ),
       });
-      return;
+      console.log('catch')
     }
-    dispatch({
-      type: ALL_ALLOS,
-      payload: response.allos,
-    });
   };
 }
 
@@ -69,21 +85,35 @@ export function getAllo(id, login) {
   return async (dispatch, getState) => {
     dispatch({ type: ALLOS_LOADING, payload: true });
     const state = getState();
-    const response = await AllosService.getAllo(id, login, state.auth.token);
-    if (!response.success) {
+    try {
+      const response = await AllosService.getAllo(id, login, state.auth.token);
+      if (!response.success) {
+        dispatch({
+          type: ADD_NOTIFICATION,
+          payload: createMessage(
+            "Impossible de récuperer cet allo 😢",
+            "Réessaye plus tard",
+            { type: "danger", duration: 5000 }
+          ),
+        });
+        return;
+      }
+      dispatch({
+        type: GET_ALLO,
+        payload: response.allo,
+      });
+    } catch {
+      dispatch({
+        type: LOGOUT,
+      });
       dispatch({
         type: ADD_NOTIFICATION,
         payload: createMessage(
-          "Impossible de récuperer cet allo 😢",
-          "Réessaye plus tard",
+          "Vous avez été déconnecté 😢",
+          "Votre session a expiré",
           { type: "danger", duration: 5000 }
         ),
       });
-      return;
     }
-    dispatch({
-      type: GET_ALLO,
-      payload: response.allo,
-    });
   };
 }

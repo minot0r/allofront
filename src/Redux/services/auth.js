@@ -5,10 +5,17 @@ const cookies = new Cookies();
 
 const API_URL = "https://kimonodvie-alloservice.herokuapp.com/auth";
 
+const axiosClient = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
 const AuthService = {
   login: (username, password) => {
-    return axios
-      .post(`${API_URL}/login`, {
+    return axiosClient
+      .post('/login', {
         username,
         password,
       })
@@ -30,13 +37,13 @@ const AuthService = {
     cookies.remove("token");
   },
   available: (username) => {
-    return axios.post(`${API_URL}/available`, { username }).then((response) => {
+    return axiosClient.post('/available', { username }).then((response) => {
       return response.data;
     });
   },
   register(name, username, password) {
-    return axios
-      .post(`${API_URL}/register`, {
+    return axiosClient
+      .post('/register', {
         name,
         username,
         password,
@@ -46,7 +53,7 @@ const AuthService = {
       });
   },
   captchaVerify: (token) => {
-    return axios.post(`${API_URL}/captchaverify`, { token }).then((response) => {
+    return axiosClient.post('captchaverify', { token }).then((response) => {
       return response.data.success;
     });
   },

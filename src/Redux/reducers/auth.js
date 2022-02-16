@@ -10,6 +10,8 @@ const LOGIN_FAILURE = "auth/LoginFailure";
 const LOADING = "auth/Loading";
 const LOGOUT = "auth/Logout";
 
+export { LOGIN_SUCCESS, LOGIN_FAILURE, LOADING, LOGOUT };
+
 const cookies = new Cookies();
 
 const user = cookies.get("user");
