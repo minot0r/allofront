@@ -3,7 +3,6 @@ import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Home/Home";
 import {
-  KimonoConstruct,
   KimonoModal,
 } from "./Components/Kimono";
 import Cookies from "universal-cookie";
@@ -12,6 +11,7 @@ import Allos from "./Allos/Allos";
 import Allo from "./Allos/Allo";
 import Account from "./Account/Account";
 import Shortcut from "./Components/Shortcut/Shortcut";
+import Liste from "./Components/Liste/Liste";
 
 const cookies = new Cookies();
 let cookiesAccepted = cookies.get("accept_cookies") !== undefined;
@@ -53,7 +53,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/allos" element={<Allos />} />
           <Route path="/allos/:alloId" element={<Allo />} />
-          <Route path="/bde" element={<KimonoConstruct />} />
+          <Route path="/bde" element={<Liste />} />
           <Route
             path="/compte"
             element={
