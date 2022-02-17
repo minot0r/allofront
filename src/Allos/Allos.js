@@ -29,7 +29,7 @@ export default function Allos() {
         <>
           {allos.map((allo, index) => (
             <KimonoNavBox
-              className={allo.price > 0 ? "success-bg" : "danger-bg"}
+              className={!allo.free ? "success-bg" : "danger-bg"}
               icon={"📱"}
               key={index}
               to={`/allos/${allo.id}`}
@@ -38,21 +38,21 @@ export default function Allos() {
                 <KimonoButtons>
                   <KimonoAuthLink
                     onClick={(e) => {
-                      if (allo.price === 0) {
+                      if (allo.free) {
                         e.preventDefault();
                         e.stopPropagation();
-                        window.location.href = `tel:0695450345`;
+                        window.location.href = `tel:+33${allo.phone}`;
                       }
                     }}
                     to={`/allos/${allo.id}/slots`}
-                    className={allo.price > 0 ? "success-bg" : "danger-bg"}
+                    className={!allo.free ? "success-bg" : "danger-bg"}
                   >
-                    {allo.price > 0 ? "🍽️ Réserver" : "Voir le numéro"}
+                    {!allo.free ? "🍽️ Réserver" : "Voir le numéro"}
                   </KimonoAuthLink>
                   <KimonoButton>📖 + d'informations</KimonoButton>
                 </KimonoButtons>
               }
-              footer={allo.price > 0 && <h3>💰 {allo.price} €</h3>}
+              footer={!allo.free && <h3>Cotisation demandée</h3>}
             >
               <p>{allo.description}</p>
             </KimonoNavBox>

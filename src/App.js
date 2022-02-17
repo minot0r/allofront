@@ -3,6 +3,9 @@ import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Home/Home";
 import {
+  KimonoAuthRoute,
+  KimonoCenter,
+  KimonoLink,
   KimonoModal,
 } from "./Components/Kimono";
 import Cookies from "universal-cookie";
@@ -12,6 +15,8 @@ import Allo from "./Allos/Allo";
 import Account from "./Account/Account";
 import Shortcut from "./Components/Shortcut/Shortcut";
 import Liste from "./Components/Liste/Liste";
+import Admin from "./Admin/Admin";
+import CreateAllo from "./Components/Admin/CreateAllo";
 
 const cookies = new Cookies();
 let cookiesAccepted = cookies.get("accept_cookies") !== undefined;
@@ -60,6 +65,20 @@ function App() {
               <Account />
             }
           />
+          <Route path="/admin" element={<KimonoAuthRoute />} >
+            <Route index element={<Admin />} />
+            <Route path="createallo" element={<CreateAllo />} />
+          </Route>
+          <Route path="*" element={
+            <KimonoCenter width={"80%"} style={{textAlign: "center"}}>
+              <h1>👷 4️0️4️</h1>
+              <h2>Page non trouvée</h2>
+              <KimonoLink to="/" className={"success-bg"}>
+                Retourner à l'accueil
+              </KimonoLink>
+            </KimonoCenter>
+          }>
+          </Route>
         </Routes>
         <Shortcut />
       </div>

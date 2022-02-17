@@ -4,7 +4,7 @@ import "./Kimono.css";
 export default function KimonoNavBox(props) {
   const {
     className,
-    icon,
+    icon = "",
     title,
     buttons,
     children,
@@ -18,7 +18,7 @@ export default function KimonoNavBox(props) {
       <div className="kimono-box-container">
         {title && (
           <div className="kimono-box-title">
-            <h3>{title}</h3>
+            <h3>{title} {icon}</h3>
           </div>
         )}
         <div className="kimono-box-content">{children}</div>

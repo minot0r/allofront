@@ -117,3 +117,43 @@ export function getAllo(id, login) {
     }
   };
 }
+
+export function createAllo(allo) {
+  return async (dispatch, getState) => {
+    const state = getState();
+    try {
+      const response = await AllosService.createAllo(allo, state.auth.token);
+      if (!response.success) {
+        dispatch({
+          type: ADD_NOTIFICATION,
+          payload: createMessage(
+            "Impossible de créer cet allo 😢",
+            "Réessaye plus tard",
+            { type: "danger", duration: 5000 }
+          ),
+        });
+        return;
+      }
+      dispatch({
+        type: ADD_NOTIFICATION,
+        payload: createMessage(
+          "Allo créé avec succès 😎",
+          "",
+          { type: "success", duration: 5000 }
+        ),
+      });
+    } catch {
+      dispatch({
+        type: LOGOUT,
+      });
+      dispatch({
+        type: ADD_NOTIFICATION,
+        payload: createMessage(
+          "Vous avez été déconnecté 😢",
+          "Votre session a expiré",
+          { type: "danger", duration: 5000 }
+        ),
+      });
+    }
+  };
+}

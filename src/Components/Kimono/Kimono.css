@@ -236,6 +236,70 @@
     }
   }
 
+.kimono-switch-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.kimono-switch-container :first-child {
+    max-width: calc(100% - 60px);
+}
+
+.kimono-switch {
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: 1em 0;
+}
+
+.kimono-switch input {
+    display: none;
+}
+
+.kimono-switch .slider {
+    position: absolute;
+    cursor: pointer;
+    width: 60px;
+    height: 34px;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.kimono-switch .slider::before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+.kimono-switch input:checked + .slider {
+    background-color: var(--primary);
+}
+
+.kimono-switch input:focus + .slider {
+    box-shadow: 0 0 1px var(--primary);
+}
+
+.kimono-switch input:checked + .slider::before {
+    transform: translateX(26px);
+}
+
+.kimono-switch .slider.round {
+    border-radius: 34px;
+}
+
+.kimono-switch .slider.round::before {
+    border-radius: 50%;
+}
+
+
 .kimono-modal  {
     display: block;
     position: fixed;

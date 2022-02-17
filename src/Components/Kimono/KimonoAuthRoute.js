@@ -1,12 +1,8 @@
 import { useSelector } from "react-redux";
-import { Route, useNavigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 export default function KimonoAuthRoute(props) {
-    const { redirect, ...rest } = props;
-    const loggedIn = useSelector((state) => state.auth.loggedIn);
-    const navigate = useNavigate();
-    if(!loggedIn) {
-        navigate(redirect);
-    }
-    return <Route {...rest} />;
+    const { ...rest } = props;
+    const admin = useSelector((state) => state.auth.user?.admin);
+    return admin ? <Outlet {...rest} /> : <Navigate to={"/"} />;;
 }
