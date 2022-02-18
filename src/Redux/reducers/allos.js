@@ -1,18 +1,26 @@
 import AllosService from "../services/allos";
 import { createMessage } from "../services/message";
-import { LOGOUT } from "./auth";
 
 import { ADD_NOTIFICATION } from "./notification";
 
 const ALL_ALLOS = "allos/AllAllos";
-const ALLOS_LOADING = "allos/AllosLoading";
+const LOADING = "allos/AllosLoading";
 const GET_ALLO = "allos/GetAllo";
+const ALL_SLOTS = "allos/AllSlots";
+const GET_SLOT = "allos/GetSlot";
+const RESERVE_SLOT = "allos/ReserveSlot";
+const UNRESERVE_SLOT = "allos/UnreserveSlot";
+const VALIDATE_SLOT = "allos/ValidateSlot";
+const GET_RESERVED_SLOTS = "allos/GetReservedSlots";
 
-export { ALL_ALLOS, ALLOS_LOADING, GET_ALLO };
+export { ALL_ALLOS, LOADING, GET_ALLO, ALL_SLOTS, GET_SLOT };
 
 const initialState = {
+  reservedSlots: [],
   allos: [],
-  allo: {},
+  allo: null,
+  slots: [],
+  slot: null,
   loading: false,
 };
 
@@ -33,10 +41,58 @@ export const allosReducer = (state = initialState, action) => {
         loading: false,
       };
       break;
-    case ALLOS_LOADING:
+    case LOADING:
       state = {
         ...state,
         loading: action.payload,
+      };
+      break;
+    case ALL_SLOTS:
+      state = {
+        ...state,
+        slots: action.payload,
+        loading: false,
+      };
+      break;
+    case GET_SLOT:
+      state = {
+        ...state,
+        slot: action.payload,
+        loading: false,
+      };
+      break;
+    case RESERVE_SLOT:
+      state = {
+        ...state,
+        slot: null,
+        slots: [],
+        reservedSlots: [],
+        loading: false,
+      };
+      break;
+    case UNRESERVE_SLOT:
+      state = {
+        ...state,
+        slot: null,
+        slots: [],
+        reservedSlots: [],
+        loading: false,
+      };
+      break;
+    case VALIDATE_SLOT:
+      state = {
+        ...state,
+        slot: null,
+        slots: [],
+        reservedSlots: [],
+        loading: false,
+      };
+      break;
+    case GET_RESERVED_SLOTS:
+      state = {
+        ...state,
+        reservedSlots: action.payload,
+        loading: false,
       };
       break;
   }
@@ -45,115 +101,240 @@ export const allosReducer = (state = initialState, action) => {
 
 export function getAllos(login) {
   return async (dispatch, getState) => {
-    dispatch({ type: ALLOS_LOADING, payload: true });
+    dispatch({ type: LOADING, payload: true });
     const state = getState();
-    try {
-      const response = await AllosService.getAllos(login, state.auth.token);
-      if (!response.success) {
-        dispatch({
-          type: ADD_NOTIFICATION,
-          payload: createMessage(
-            "Impossible de récuperer nos allos 😢",
-            "Réessaye plus tard",
-            { type: "danger", duration: 5000 }
-          ),
-        });
-        return;
-      }
-      dispatch({
-        type: ALL_ALLOS,
-        payload: response.allos,
-      });
-    } catch {
-      dispatch({
-        type: LOGOUT,
-      });
+    const response = await AllosService.getAllos(login, state.auth.token);
+    if (!response.success) {
       dispatch({
         type: ADD_NOTIFICATION,
         payload: createMessage(
-          "Vous avez été déconnecté 😢",
-          "Votre session a expiré",
+          "Impossible de récuperer nos allos 😢",
+          "Réessaye plus tard",
           { type: "danger", duration: 5000 }
         ),
       });
-      console.log('catch')
+      return;
     }
+    dispatch({
+      type: ALL_ALLOS,
+      payload: response.allos,
+    });
   };
 }
 
 export function getAllo(id, login) {
   return async (dispatch, getState) => {
-    dispatch({ type: ALLOS_LOADING, payload: true });
+    dispatch({ type: LOADING, payload: true });
     const state = getState();
-    try {
-      const response = await AllosService.getAllo(id, login, state.auth.token);
-      if (!response.success) {
-        dispatch({
-          type: ADD_NOTIFICATION,
-          payload: createMessage(
-            "Impossible de récuperer cet allo 😢",
-            "Réessaye plus tard",
-            { type: "danger", duration: 5000 }
-          ),
-        });
-        return;
-      }
-      dispatch({
-        type: GET_ALLO,
-        payload: response.allo,
-      });
-    } catch {
-      dispatch({
-        type: LOGOUT,
-      });
+    const response = await AllosService.getAllo(id, login, state.auth.token);
+    if (!response.success) {
       dispatch({
         type: ADD_NOTIFICATION,
         payload: createMessage(
-          "Vous avez été déconnecté 😢",
-          "Votre session a expiré",
+          "Impossible de récuperer cet allo 😢",
+          "Réessaye plus tard",
           { type: "danger", duration: 5000 }
         ),
       });
+      return;
     }
+    dispatch({
+      type: GET_ALLO,
+      payload: response.allo,
+    });
   };
 }
 
 export function createAllo(allo) {
   return async (dispatch, getState) => {
     const state = getState();
-    try {
-      const response = await AllosService.createAllo(allo, state.auth.token);
-      if (!response.success) {
-        dispatch({
-          type: ADD_NOTIFICATION,
-          payload: createMessage(
-            "Impossible de créer cet allo 😢",
-            "Réessaye plus tard",
-            { type: "danger", duration: 5000 }
-          ),
-        });
-        return;
-      }
+    const response = await AllosService.createAllo(allo, state.auth.token);
+    if (!response.success) {
       dispatch({
         type: ADD_NOTIFICATION,
         payload: createMessage(
-          "Allo créé avec succès 😎",
-          "",
-          { type: "success", duration: 5000 }
-        ),
-      });
-    } catch {
-      dispatch({
-        type: LOGOUT,
-      });
-      dispatch({
-        type: ADD_NOTIFICATION,
-        payload: createMessage(
-          "Vous avez été déconnecté 😢",
-          "Votre session a expiré",
+          "Impossible de créer cet allo 😢",
+          "Réessaye plus tard",
           { type: "danger", duration: 5000 }
         ),
       });
+      return;
     }
+    dispatch({
+      type: ADD_NOTIFICATION,
+      payload: createMessage("Allo créé avec succès 😎", "", {
+        type: "success",
+        duration: 5000,
+      }),
+    });
+  };
+}
+
+export function getSlots(alloId) {
+  return async (dispatch, getState) => {
+    dispatch({ type: LOADING, payload: true });
+    const state = getState();
+    const response = await AllosService.getSlots(alloId, state.auth.token);
+    if (!response.success) {
+      dispatch({
+        type: ADD_NOTIFICATION,
+        payload: createMessage(
+          "Impossible de récuperer les créneaux 😢",
+          "Réessaye plus tard",
+          { type: "danger", duration: 5000 }
+        ),
+      });
+      return;
+    }
+    dispatch({
+      type: ALL_SLOTS,
+      payload: response.slots,
+    });
+  };
+}
+
+export function getSlot(alloId, slotId) {
+  return async (dispatch, getState) => {
+    dispatch({ type: LOADING, payload: true });
+    const state = getState();
+    const response = await AllosService.getSlot(
+      alloId,
+      slotId,
+      state.auth.token
+    );
+    if (!response.success) {
+      dispatch({
+        type: ADD_NOTIFICATION,
+        payload: createMessage(
+          "Impossible de récuperer ce créneau 😢",
+          "Réessaye plus tard",
+          { type: "danger", duration: 5000 }
+        ),
+      });
+      return;
+    }
+    dispatch({
+      type: GET_SLOT,
+      payload: response.slot,
+    });
+  };
+}
+
+export function reserveSlot(alloId, slotId) {
+  return async (dispatch, getState) => {
+    dispatch({ type: LOADING, payload: true });
+    const response = await AllosService.reserveSlot(
+      alloId,
+      slotId,
+      getState().auth.token
+    );
+    if (!response.success) {
+      dispatch({
+        type: ADD_NOTIFICATION,
+        payload: createMessage(
+          "Oups 😢",
+          "Quelqu'un à déjà réservé ce créneau avant toi",
+          { type: "danger", duration: 5000 }
+        ),
+      });
+      return;
+    }
+    dispatch({
+      type: RESERVE_SLOT,
+    });
+    dispatch({
+      type: ADD_NOTIFICATION,
+      payload: createMessage(
+        "Créneau réservé avec succès 😎",
+        "Tu as 15 minutes pour le valider",
+        {
+          type: "success",
+          duration: 5000,
+        }
+      ),
+    });
+  };
+}
+
+export function validateSlot(alloId, slotId, phone) {
+  return async (dispatch, getState) => {
+    dispatch({ type: LOADING, payload: true });
+    const response = await AllosService.validateSlot(
+      alloId,
+      slotId,
+      phone,
+      getState().auth.token
+    );
+    if (!response.success) {
+      dispatch({
+        type: ADD_NOTIFICATION,
+        payload: createMessage(
+          "Oups 😢",
+          "Impossible de valider ton créneau, renseigne toi au près de la liste",
+          { type: "danger", duration: 5000 }
+        ),
+      });
+      return;
+    }
+    dispatch({
+      type: VALIDATE_SLOT,
+    });
+    dispatch({
+      type: ADD_NOTIFICATION,
+      payload: createMessage("Créneau validé avec succès 😎", "", {
+        type: "success",
+        duration: 5000,
+      }),
+    });
+  };
+}
+
+export function unreserveSlot(alloId, slotId) {
+  return async (dispatch, getState) => {
+    dispatch({ type: LOADING, payload: true });
+    const response = await AllosService.unreserveSlot(
+      alloId,
+      slotId,
+      getState().auth.token
+    );
+    if (!response.success) {
+      dispatch({
+        type: ADD_NOTIFICATION,
+        payload: createMessage(
+          "Oups 😢",
+          "Impossible d'annuler ton créneau, renseigne toi au près de la liste",
+          { type: "danger", duration: 5000 }
+        ),
+      });
+      return;
+    }
+    dispatch({
+      type: UNRESERVE_SLOT,
+    });
+    getSlots(alloId)(dispatch, getState);
+    dispatch({
+      type: ADD_NOTIFICATION,
+      payload: createMessage("Créneau annulé avec succès 😎", "", {
+        type: "success",
+        duration: 5000,
+      }),
+    });
+  };
+}
+
+export function getReservedSlots() {
+  return async (dispatch, getState) => {
+    dispatch({ type: LOADING, payload: true });
+    const state = getState();
+    const response = await AllosService.getReservedSlots(
+      state.auth.token
+    );
+    if (!response.success) {
+      return;
+    }
+    dispatch({
+      type: GET_RESERVED_SLOTS,
+      payload: response.reservedSlots,
+    });
   };
 }

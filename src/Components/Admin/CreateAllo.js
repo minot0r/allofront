@@ -12,8 +12,9 @@ import {
   KimonoSwitch,
 } from "../Kimono";
 import Moment from "react-moment";
+import 'moment/locale/fr';
 import { useDispatch } from "react-redux";
-import { createAllo } from "../../Redux/reducers/allos";
+import { createAllo, getAllos } from "../../Redux/reducers/allos";
 
 export default function CreateAllo() {
   const [title, setTitle] = useState("");
@@ -94,7 +95,7 @@ export default function CreateAllo() {
               footer={
                 <h3>
                   Temps :{" "}
-                  <Moment locale="fr" duration={slot.start} date={slot.end} />
+                  <Moment local locale="fr" duration={slot.start} date={slot.end} />
                 </h3>
               }
               buttons={
@@ -176,6 +177,7 @@ export default function CreateAllo() {
                 slots: withSlots ? slots : [],
               })
             );
+            dispatch(getAllos(true));
           }}
         >
           Créer ce allo

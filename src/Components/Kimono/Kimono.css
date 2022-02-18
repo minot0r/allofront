@@ -120,6 +120,11 @@
     color: black;
 }
 
+.kimono-box.no-margin {
+    margin: 0;
+    width: 100%;
+}
+
 .kimono-box-container {
     width: calc(100% - 40px);
     padding: 20px;

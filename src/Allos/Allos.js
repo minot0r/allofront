@@ -1,4 +1,7 @@
-import { useSelector, shallowEqual } from "react-redux";
+import { useEffect } from "react";
+import Moment from "react-moment";
+import "moment/locale/fr";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import {
   KimonoButton,
   KimonoButtons,
@@ -7,14 +10,56 @@ import {
   KimonoNavBox,
   KimonoAuthLink,
 } from "../Components/Kimono";
+import { getReservedSlots } from "../Redux/reducers/allos";
 import "./Allos.css";
 
 export default function Allos() {
   let loading = useSelector((state) => state.allos.loading, shallowEqual);
   let allos = useSelector((state) => state.allos.allos);
 
+  const dispatch = useDispatch();
+
+  const reservedSlots = useSelector((state) => state.allos.reservedSlots);
+  const loggedIn = useSelector((state) => state.auth.loggedIn);
+
+  useEffect(() => {
+    if(!loggedIn) return;
+    dispatch(getReservedSlots());
+  }, [dispatch, loggedIn]);
+
   return (
     <div className="allos-container">
+      {reservedSlots.length > 0 &&
+        reservedSlots.map((slot) => {
+          return (
+            <KimonoNavBox className={slot.reserved ? "success-bg" : "warning-bg"}
+              title={`Créneau ${new Date(slot.start) < new Date() ? "en cours " :  " "}pour ${slot.parentName}`}
+              key={slot.id}
+              to={`/allos/${slot.parent}/reserve/${slot.id}`}
+            >
+              <h3>
+                <Moment format="HH:mm">{slot.start}</Moment>
+                {" - "}
+                <Moment format="HH:mm">{slot.end}</Moment>
+              </h3>
+              { new Date(slot.start) < new Date() ?
+              <p>
+                Débutait{" "}
+                <Moment locale="fr" fromNow>
+                  {slot.start}
+                </Moment>
+              </p>
+              :
+              <p>
+                Commence{" "}
+                <Moment locale="fr" fromNow>
+                  {slot.start}
+                </Moment>
+              </p>
+              }
+            </KimonoNavBox>
+          );
+        })}
       <KimonoCenter width={"80%"}>
         <h1>AlLlllLOooO??? 🤙🤙🤙</h1>
         <h3>
@@ -29,7 +74,7 @@ export default function Allos() {
         <>
           {allos.map((allo, index) => (
             <KimonoNavBox
-              className={!allo.free ? "success-bg" : "danger-bg"}
+              className={!allo.hasSlots ? "success-bg" : "danger-bg"}
               icon={"📱"}
               key={index}
               to={`/allos/${allo.id}`}
@@ -38,16 +83,16 @@ export default function Allos() {
                 <KimonoButtons>
                   <KimonoAuthLink
                     onClick={(e) => {
-                      if (allo.free) {
+                      if (!allo.hasSlots) {
                         e.preventDefault();
                         e.stopPropagation();
                         window.location.href = `tel:+33${allo.phone}`;
                       }
                     }}
                     to={`/allos/${allo.id}/slots`}
-                    className={!allo.free ? "success-bg" : "danger-bg"}
+                    className={!allo.hasSlots ? "success-bg" : "danger-bg"}
                   >
-                    {!allo.free ? "🍽️ Réserver" : "Voir le numéro"}
+                    {allo.hasSlots ? "🍽️ Réserver" : "Voir le numéro"}
                   </KimonoAuthLink>
                   <KimonoButton>📖 + d'informations</KimonoButton>
                 </KimonoButtons>

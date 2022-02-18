@@ -19,7 +19,7 @@ export default function Allo() {
   }, [dispatch, loggedIn, params.alloId]);
   const allo = useSelector((state) => state.allos.allo);
   const loading = useSelector((state) => state.allos.loading);
-  const color = allo?.price > 0 ? "success" : "danger";
+  const color = !allo?.hasSlots ? "success" : "danger";
   if (loading) return <KimonoLoading />;
   return (
     <KimonoCenter width={"80%"}>
@@ -28,22 +28,27 @@ export default function Allo() {
           <h1 className={color}>{allo.name}</h1>
           <h3>{allo.description}</h3>
           {!allo.free ? (
-            <div>
-              <p className={color}>
-                Cet allo demande une cotisation, cela signifie qu'il faut
-                réserver pour pouvoir participer et verser une petite aide
-                financière pour alléger les dépenses de la liste 💖
-              </p>
-              <p>Il reste {allo.slotsLeft} créneaux libres</p>
-              <KimonoAuthLink to={`/allos/${allo.id}/slots`} className={color}>
-                Réserver un créneau ({allo.price}€)
-              </KimonoAuthLink>
-            </div>
+            <p className={color}>
+              Cet allo demande une cotisation, cela signifie qu'il faut réserver
+              pour pouvoir participer et verser une petite aide financière pour
+              alléger les dépenses de la liste 💖
+            </p>
           ) : (
             <p className={color}>
               Cet allo est gratuit. YOUHOU ! Appelle le numéro dès maintenant
               pour accèder à l'allo.
             </p>
+          )}
+          {allo.hasSlots && (
+            <>
+              <p>Il reste {allo.slotsLeft} créneaux libres</p>
+              <KimonoAuthLink
+                to={`/allos/${params.alloId}/slots`}
+                className={color}
+              >
+                Réserver un créneau {!allo.free && `(cotisation demandée de ${allo.price}€)`}
+              </KimonoAuthLink>
+            </>
           )}
           <KimonoAuthButton
             className={"primary-bg"}
@@ -51,7 +56,7 @@ export default function Allo() {
               window.location.href = `tel:+33${allo.phone}`;
             }}
           >
-            Appeler le numéro {!allo.free && "pour plus d'inforations"}
+            Appeler le numéro {allo.hasSlots && "pour plus d'informations"}
           </KimonoAuthButton>
         </>
       ) : (

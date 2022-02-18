@@ -3,6 +3,7 @@ import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Home/Home";
 import {
+  KimonoAdminRoute,
   KimonoAuthRoute,
   KimonoCenter,
   KimonoLink,
@@ -17,6 +18,8 @@ import Shortcut from "./Components/Shortcut/Shortcut";
 import Liste from "./Components/Liste/Liste";
 import Admin from "./Admin/Admin";
 import CreateAllo from "./Components/Admin/CreateAllo";
+import Slots from "./Components/Allo/Slots";
+import Reserve from "./Components/Allo/Reserve";
 
 const cookies = new Cookies();
 let cookiesAccepted = cookies.get("accept_cookies") !== undefined;
@@ -58,6 +61,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/allos" element={<Allos />} />
           <Route path="/allos/:alloId" element={<Allo />} />
+          <Route path="/allos/:alloId" element={<KimonoAuthRoute />} >
+            <Route path="slots" element={<Slots />} />
+            <Route path="reserve/:slotId" element={<Reserve />} />
+          </Route>
           <Route path="/bde" element={<Liste />} />
           <Route
             path="/compte"
@@ -65,7 +72,7 @@ function App() {
               <Account />
             }
           />
-          <Route path="/admin" element={<KimonoAuthRoute />} >
+          <Route path="/admin" element={<KimonoAdminRoute />} >
             <Route index element={<Admin />} />
             <Route path="createallo" element={<CreateAllo />} />
           </Route>
