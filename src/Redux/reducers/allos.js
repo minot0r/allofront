@@ -12,11 +12,13 @@ const RESERVE_SLOT = "allos/ReserveSlot";
 const UNRESERVE_SLOT = "allos/UnreserveSlot";
 const VALIDATE_SLOT = "allos/ValidateSlot";
 const GET_RESERVED_SLOTS = "allos/GetReservedSlots";
+const GET_RUNNING_SLOTS = "allos/GetRunningSlots";
 
 export { ALL_ALLOS, LOADING, GET_ALLO, ALL_SLOTS, GET_SLOT };
 
 const initialState = {
   reservedSlots: [],
+  runningSlots: [],
   allos: [],
   allo: null,
   slots: [],
@@ -92,6 +94,13 @@ export const allosReducer = (state = initialState, action) => {
       state = {
         ...state,
         reservedSlots: action.payload,
+        loading: false,
+      };
+      break;
+    case GET_RUNNING_SLOTS:
+      state = {
+        ...state,
+        runningSlots: action.payload,
         loading: false,
       };
       break;
@@ -335,6 +344,23 @@ export function getReservedSlots() {
     dispatch({
       type: GET_RESERVED_SLOTS,
       payload: response.reservedSlots,
+    });
+  };
+}
+
+export function getRunningSlots() {
+  return async (dispatch, getState) => {
+    dispatch({ type: LOADING, payload: true });
+    const state = getState();
+    const response = await AllosService.getRunningSlots(
+      state.auth.token
+    );
+    if (!response.success) {
+      return;
+    }
+    dispatch({
+      type: GET_RUNNING_SLOTS,
+      payload: response.slots,
     });
   };
 }

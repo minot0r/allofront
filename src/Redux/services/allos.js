@@ -152,6 +152,20 @@ const AllosService = {
       .then((response) => {
         return response.data;
       });
+  },
+  getRunningSlots: (token) => {
+    return axiosClient
+      .get(
+        "admin/runningSlots",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        return response.data;
+      });
   }
 };
 
