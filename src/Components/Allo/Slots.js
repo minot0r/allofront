@@ -48,7 +48,7 @@ export default function Slots() {
   if (loading) return <KimonoLoading />;
   return (
     <>
-      {slots.length > 0 ? (
+      {slots.filter((slot) => new Date(slot.start) > new Date()).length > 0 ? (
         <>
           {selectedSlot !== null && (
             <KimonoModal
@@ -123,19 +123,24 @@ export default function Slots() {
                           }
                           buttons={
                             <KimonoButtons>
-                              {slot.reservedBy === username && !slot.validated ? (
+                              {slot.reservedBy === username &&
+                              !slot.validated ? (
                                 <>
-                                <KimonoLink
-                                  className="success-bg"
-                                  to={`/allos/${params.alloId}/reserve/${slot.id}`}
-                                >
-                                  Continuer la réservation de ce créneau
-                                </KimonoLink>
-                                <KimonoButton onClick={() => {
-                                    dispatch(unreserveSlot(params.alloId, slot.id));
-                                }}>
-                                  Annuler la réservation
-                                </KimonoButton>
+                                  <KimonoLink
+                                    className="success-bg"
+                                    to={`/allos/${params.alloId}/reserve/${slot.id}`}
+                                  >
+                                    Continuer la réservation de ce créneau
+                                  </KimonoLink>
+                                  <KimonoButton
+                                    onClick={() => {
+                                      dispatch(
+                                        unreserveSlot(params.alloId, slot.id)
+                                      );
+                                    }}
+                                  >
+                                    Annuler la réservation
+                                  </KimonoButton>
                                 </>
                               ) : slot.reservedBy === username ? (
                                 <KimonoButton className="success-bg">
@@ -180,7 +185,7 @@ export default function Slots() {
             })}
         </>
       ) : (
-        <>
+        <KimonoCenter width="80%">
           <h1>Oups 🥿</h1>
           <p>Cet allo n'a pas/plus de créneaux. Retourne en lieu sûr.</p>
           <KimonoButton
@@ -190,7 +195,7 @@ export default function Slots() {
           >
             Retour
           </KimonoButton>
-        </>
+        </KimonoCenter>
       )}
     </>
   );

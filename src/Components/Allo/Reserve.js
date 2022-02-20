@@ -29,6 +29,7 @@ export default function Reserve() {
 
   const [reservedByOther, setReservedByOther] = useState(false);
   const [phone, setPhone] = useState("");
+  const [paying, setPaying] = useState(false);
 
   const allo = useSelector((state) => state.allos.allo);
   const slot = useSelector((state) => state.allos.slot);
@@ -88,7 +89,9 @@ export default function Reserve() {
                 <span className="success-bg kimono-bounce">
                   numéro de téléphone
                 </span>{" "}
-                pour te contacter (Ce numéro est privé et ne sera pas visible par n'importe quel utilisateur, et ne sera pas sauvegardé en base de données)
+                pour te contacter (Ce numéro est privé et ne sera pas visible
+                par n'importe quel utilisateur, et ne sera pas sauvegardé en
+                base de données)
               </p>
               <KimonoInput
                 className={phone.length === 9 ? "success-bg" : ""}
@@ -157,7 +160,7 @@ export default function Reserve() {
                   onSubmit={async (e) => {
                     e.preventDefault();
                     if (!stripe || !elements) return;
-
+                    setPaying(true);
                     const { clientSecret } = await PaymentService.createIntent(
                       alloId,
                       slotId,
@@ -172,7 +175,7 @@ export default function Reserve() {
                           },
                         },
                       });
-
+                    setPaying(false);
                     if (stripeError) {
                       dispatch({
                         type: ADD_NOTIFICATION,
@@ -200,7 +203,9 @@ export default function Reserve() {
                     <span className="success-bg kimono-bounce">
                       numéro de téléphone
                     </span>{" "}
-                    pour te contacter (Ce numéro est privé et ne sera pas visible par n'importe quel utilisateur, et ne sera pas sauvegardé en base de données)
+                    pour te contacter (Ce numéro est privé et ne sera pas
+                    visible par n'importe quel utilisateur, et ne sera pas
+                    sauvegardé en base de données)
                   </p>
                   <KimonoInput
                     className={phone.length === 9 ? "success-bg" : ""}
@@ -213,11 +218,14 @@ export default function Reserve() {
                     }}
                     placeholder="Téléphone"
                   />
-                  {phone.length === 9 && (
+                  {phone.length === 9 && !paying && (
                     <KimonoSubmit
                       className={"success-bg"}
                       value={`Payer et valider`}
                     />
+                  )}
+                  {paying && (
+                    <KimonoLoading />
                   )}
                 </form>
               </KimonoCenter>

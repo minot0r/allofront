@@ -13,8 +13,21 @@ const UNRESERVE_SLOT = "allos/UnreserveSlot";
 const VALIDATE_SLOT = "allos/ValidateSlot";
 const GET_RESERVED_SLOTS = "allos/GetReservedSlots";
 const GET_RUNNING_SLOTS = "allos/GetRunningSlots";
+const CREATE_ALLO = "allos/CreateAllo";
 
-export { ALL_ALLOS, LOADING, GET_ALLO, ALL_SLOTS, GET_SLOT };
+export {
+  ALL_ALLOS,
+  LOADING,
+  GET_ALLO,
+  ALL_SLOTS,
+  GET_SLOT,
+  RESERVE_SLOT,
+  UNRESERVE_SLOT,
+  VALIDATE_SLOT,
+  GET_RESERVED_SLOTS,
+  GET_RUNNING_SLOTS,
+  CREATE_ALLO,
+};
 
 const initialState = {
   reservedSlots: [],
@@ -104,6 +117,12 @@ export const allosReducer = (state = initialState, action) => {
         loading: false,
       };
       break;
+    case CREATE_ALLO:
+      state = {
+        ...state,
+        loading: false,
+      };
+      break;
   }
   return state;
 };
@@ -156,6 +175,7 @@ export function getAllo(id, login) {
 
 export function createAllo(allo) {
   return async (dispatch, getState) => {
+    dispatch({ type: LOADING, payload: true });
     const state = getState();
     const response = await AllosService.createAllo(allo, state.auth.token);
     if (!response.success) {
@@ -169,6 +189,9 @@ export function createAllo(allo) {
       });
       return;
     }
+    dispatch({
+      type: CREATE_ALLO,
+    });
     dispatch({
       type: ADD_NOTIFICATION,
       payload: createMessage("Allo créé avec succès 😎", "", {
@@ -335,9 +358,7 @@ export function getReservedSlots() {
   return async (dispatch, getState) => {
     dispatch({ type: LOADING, payload: true });
     const state = getState();
-    const response = await AllosService.getReservedSlots(
-      state.auth.token
-    );
+    const response = await AllosService.getReservedSlots(state.auth.token);
     if (!response.success) {
       return;
     }
@@ -352,9 +373,7 @@ export function getRunningSlots() {
   return async (dispatch, getState) => {
     dispatch({ type: LOADING, payload: true });
     const state = getState();
-    const response = await AllosService.getRunningSlots(
-      state.auth.token
-    );
+    const response = await AllosService.getRunningSlots(state.auth.token);
     if (!response.success) {
       return;
     }

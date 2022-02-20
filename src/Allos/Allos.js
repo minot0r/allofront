@@ -30,7 +30,9 @@ export default function Allos() {
   return (
     <div className="allos-container">
       {reservedSlots.length > 0 &&
-        reservedSlots.map((slot) => {
+        reservedSlots
+        .filter((slot) => new Date(slot.end) > new Date())
+        .map((slot) => {
           return (
             <KimonoNavBox className={slot.reserved ? "success-bg" : "warning-bg"}
               title={`Créneau ${new Date(slot.start) < new Date() ? "en cours " :  " "}pour ${slot.parentName}`}

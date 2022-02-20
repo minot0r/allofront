@@ -9,11 +9,12 @@ import {
   KimonoButtons,
   KimonoCenter,
   KimonoInput,
+  KimonoLoading,
   KimonoSwitch,
 } from "../Kimono";
 import Moment from "react-moment";
 import 'moment/locale/fr';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createAllo, getAllos } from "../../Redux/reducers/allos";
 
 export default function CreateAllo() {
@@ -31,6 +32,10 @@ export default function CreateAllo() {
   ]);
 
   const dispatch = useDispatch();
+
+  const loading = useSelector((state) => state.allos.loading);
+
+  if(loading) return <KimonoLoading />;
 
   return (
     <>
