@@ -130,7 +130,7 @@ export default function Reserve() {
             </KimonoCenter>
           ) : (
             <KimonoBox width={"80%"}>
-              <p>Bravo! votre créneau est validé :)</p>
+              <p>Bravo! votre créneau est validé 😄</p>
             </KimonoBox>
           )
         ) : !slot.validated ? (
@@ -246,7 +246,7 @@ export default function Reserve() {
           </KimonoCenter>
         ) : (
           <KimonoBox width={"80%"}>
-            <p>Bravo! Votre créneau est validé :)</p>
+            <p>Bravo! Votre créneau est validé 😄</p>
           </KimonoBox>
         )}
       </>
