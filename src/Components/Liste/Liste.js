@@ -1,7 +1,21 @@
+import { useState } from 'react';
+import { KimonoBox, KimonoImage } from '../Kimono';
 import "./Liste.css";
 
 export default function Liste() {
-    return <div className="liste-container">
+    const [clicked, setClicked] = useState(false);
 
+    return <div className="liste-container">
+        <KimonoBox 
+        reverse={clicked}
+        onClick={() => setClicked(!clicked)}
+        footer={
+            <h4>Membre pôle communication</h4>
+        }
+        className={"primary-bg"}>
+            <h3>Valentin Giorgetti</h3>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <KimonoImage img={'../../logo.png'} />
+        </KimonoBox>
     </div>
 }
