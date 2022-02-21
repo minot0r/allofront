@@ -19,6 +19,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "react-spring-bottom-sheet": "^3.4.0",
+    "react-tenor": "^2.1.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1",
     "universal-cookie": "^4.0.4",

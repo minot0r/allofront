@@ -8,14 +8,17 @@ import {
   KimonoButton,
   KimonoButtons,
   KimonoCenter,
+  KimonoImage,
   KimonoInput,
   KimonoLoading,
   KimonoSwitch,
 } from "../Kimono";
 import Moment from "react-moment";
-import 'moment/locale/fr';
+import "moment/locale/fr";
 import { useDispatch, useSelector } from "react-redux";
 import { createAllo, getAllos } from "../../Redux/reducers/allos";
+import Tenor from "react-tenor";
+import "./react-tenor.css";
 
 export default function CreateAllo() {
   const [title, setTitle] = useState("");
@@ -30,12 +33,13 @@ export default function CreateAllo() {
       end: new Date(+new Date() + 1000 * 60 * 60),
     },
   ]);
+  const [selectedTenor, setSelectedTenor] = useState("");
 
   const dispatch = useDispatch();
 
   const loading = useSelector((state) => state.allos.loading);
 
-  if(loading) return <KimonoLoading />;
+  if (loading) return <KimonoLoading />;
 
   return (
     <>
@@ -53,6 +57,16 @@ export default function CreateAllo() {
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Description"
         />
+        {selectedTenor !== "" ? (
+          <KimonoImage onClick={() => setSelectedTenor("")} img={selectedTenor} />
+        ) : (
+          <Tenor
+            searchPlaceholder="Rechercher un GIF"
+            token="EHDK85HQJ0W8"
+            locale="fr_FR"
+            onSelect={(tenor) => setSelectedTenor(tenor.media[0].gif.url)}
+          />
+        )}
         <KimonoInput
           className={phone.length === 9 ? "success-bg" : ""}
           value={`+33${phone}`}
@@ -68,7 +82,7 @@ export default function CreateAllo() {
         <KimonoSwitch
           onChange={(e) => {
             setFree(e);
-            if(!e) setWithSlots(true);
+            if (!e) setWithSlots(true);
           }}
           val={free}
           title="Allo gratuit ?"
@@ -100,7 +114,12 @@ export default function CreateAllo() {
               footer={
                 <h3>
                   Temps :{" "}
-                  <Moment local locale="fr" duration={slot.start} date={slot.end} />
+                  <Moment
+                    local
+                    locale="fr"
+                    duration={slot.start}
+                    date={slot.end}
+                  />
                 </h3>
               }
               buttons={
@@ -180,6 +199,7 @@ export default function CreateAllo() {
                 free: free,
                 price: price,
                 slots: withSlots ? slots : [],
+                gif: selectedTenor,
               })
             );
             dispatch(getAllos(true));

@@ -9,6 +9,7 @@ import {
   KimonoLoading,
   KimonoNavBox,
   KimonoAuthLink,
+  KimonoImage,
 } from "../Components/Kimono";
 import { getReservedSlots } from "../Redux/reducers/allos";
 import "./Allos.css";
@@ -30,11 +31,16 @@ export default function Allos() {
   return (
     <div className="allos-container">
       {reservedSlots.length > 0 &&
-        reservedSlots
+      <>
+        <KimonoCenter width="80%">
+          <h1>HOP LA! Voilà les créneaux que t'as réservé/validé chouchou 😘</h1>
+          <p></p>
+        </KimonoCenter>
+        {reservedSlots
         .filter((slot) => new Date(slot.end) > new Date())
         .map((slot) => {
           return (
-            <KimonoNavBox className={slot.reserved ? "success-bg" : "warning-bg"}
+            <KimonoNavBox className={new Date(slot.start) < new Date() ? "success-bg" : slot.reserved ? "primary-bg" : "warning-bg"}
               title={`Créneau ${new Date(slot.start) < new Date() ? "en cours " :  " "}pour ${slot.parentName}`}
               key={slot.id}
               to={`/allos/${slot.parent}/reserve/${slot.id}`}
@@ -61,7 +67,10 @@ export default function Allos() {
               }
             </KimonoNavBox>
           );
+          
         })}
+        </>
+        }
       <KimonoCenter width={"80%"}>
         <h1>AlLlllLOooO??? 🤙🤙🤙</h1>
         <h3>
@@ -102,6 +111,7 @@ export default function Allos() {
               footer={!allo.free && <h3>Cotisation demandée</h3>}
             >
               <p>{allo.description}</p>
+              <KimonoImage img={allo.gif} />
             </KimonoNavBox>
           ))}
         </>

@@ -109,6 +109,7 @@ export default function Slots() {
                     .filter((slot) => new Date(slot.start) > new Date())
                     .sort((a, b) => new Date(a.start) - new Date(b.start))
                     .map((slot, index) => {
+                      
                       return (
                         <KimonoBox
                           key={index}
