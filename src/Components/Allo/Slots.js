@@ -71,12 +71,18 @@ export default function Slots() {
                 >
                   Annuler
                 </KimonoButton>
-                <KimonoLink
-                  className="success-bg"
-                  to={`/allos/${params.alloId}/reserve/${selectedSlot.id}`}
-                >
-                  Reserver
-                </KimonoLink>
+                {new Date() < new Date("2022-03-05") ? (
+                  <KimonoButton className={"danger-bg"}>
+                    Pas encore possible de réserver
+                  </KimonoButton>
+                ) : (
+                  <KimonoLink
+                    className="success-bg"
+                    to={`/allos/${params.alloId}/reserve/${selectedSlot.id}`}
+                  >
+                    Reserver
+                  </KimonoLink>
+                )}
               </KimonoButtons>
             </KimonoModal>
           )}
