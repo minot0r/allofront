@@ -2,7 +2,16 @@ import { useEffect, useState } from "react";
 import "./Kimono.css";
 
 export default function KimonoModal(props) {
-  const { className, children, show, type, disappear, onDisappear, ...rest } = props;
+  const {
+    className,
+    children,
+    show,
+    type,
+    disappear,
+    onDisappear,
+    onClick,
+    ...rest
+  } = props;
   let [showed, setShowed] = useState(show ?? true);
 
   useEffect(() => {
@@ -14,17 +23,19 @@ export default function KimonoModal(props) {
   }, [disappear, setShowed]);
 
   return (
-    <div
-      onClick={() => setShowed(false)}
-      className={
-        "kimono-modal " +
-        (className || "") +
-        (!showed ? " hidden" : "") +
-        (type ? ` ${type}` : "")
-      }
-      {...rest}
-    >
-      {children}
+    <div onClick={onClick}>
+      <div
+        onClick={() => setShowed(false)}
+        className={
+          "kimono-modal " +
+          (className || "") +
+          (!showed ? " hidden" : "") +
+          (type ? ` ${type}` : "")
+        }
+        {...rest}
+      >
+        {children}
+      </div>
     </div>
   );
 }

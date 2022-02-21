@@ -4,3 +4,7 @@
     padding: 0 20px;
     text-align: center;
 }
+
+div[render="explicit"] > div > div {
+    margin: auto;
+}

@@ -1,14 +1,30 @@
 import "./Kimono.css";
 
 export default function KimonoBox(props) {
-  const { className, title, children, footer, buttons, ...otherProps } = props;
+  const {
+    className,
+    title,
+    icon = "",
+    children,
+    footer,
+    buttons,
+    noMargin,
+    ...otherProps
+  } = props;
 
   return (
-    <div className={"kimono-box " + (className || "")} {...otherProps}>
+    <div
+      className={
+        "kimono-box " + (className ?? "") + (noMargin ? " no-margin" : "")
+      }
+      {...otherProps}
+    >
       <div className="kimono-box-container">
         {title && (
           <div className="kimono-box-title">
-            <h3>{title}</h3>
+            <h3>
+              {title} {icon}
+            </h3>
           </div>
         )}
         <div className="kimono-box-content">{children}</div>

@@ -128,9 +128,9 @@ code {
   color: black !important;
 }
 
-.danger-bg, .primary-bg, .warning-bg, .success-bg, .transparent-bg {
+/*.danger-bg, .primary-bg, .warning-bg, .success-bg, .transparent-bg {
   backdrop-filter: blur(5px);
-}
+}*/
 
 .danger-bg:visited, .primary-bg:visited, .warning-bg:visited, .success-bg:visited {
   color: white !important;

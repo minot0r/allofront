@@ -1,4 +1,7 @@
-import { useSelector, shallowEqual } from "react-redux";
+import { useEffect } from "react";
+import Moment from "react-moment";
+import "moment/locale/fr";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import {
   KimonoButton,
   KimonoButtons,
@@ -6,15 +9,68 @@ import {
   KimonoLoading,
   KimonoNavBox,
   KimonoAuthLink,
+  KimonoImage,
 } from "../Components/Kimono";
+import { getReservedSlots } from "../Redux/reducers/allos";
 import "./Allos.css";
 
 export default function Allos() {
   let loading = useSelector((state) => state.allos.loading, shallowEqual);
   let allos = useSelector((state) => state.allos.allos);
 
+  const dispatch = useDispatch();
+
+  const reservedSlots = useSelector((state) => state.allos.reservedSlots);
+  const loggedIn = useSelector((state) => state.auth.loggedIn);
+
+  useEffect(() => {
+    if(!loggedIn) return;
+    dispatch(getReservedSlots());
+  }, [dispatch, loggedIn]);
+
   return (
     <div className="allos-container">
+      {reservedSlots.length > 0 &&
+      <>
+        <KimonoCenter width="80%">
+          <h1>HOP LA! Voilà les créneaux que t'as réservé/validé chouchou 😘</h1>
+          <p></p>
+        </KimonoCenter>
+        {reservedSlots
+        .filter((slot) => new Date(slot.end) > new Date())
+        .map((slot) => {
+          return (
+            <KimonoNavBox className={new Date(slot.start) < new Date() ? "success-bg" : slot.reserved ? "primary-bg" : "warning-bg"}
+              title={`Créneau ${new Date(slot.start) < new Date() ? "en cours " :  " "}pour ${slot.parentName}`}
+              key={slot.id}
+              to={`/allos/${slot.parent}/reserve/${slot.id}`}
+            >
+              <h3>
+                <Moment format="HH:mm">{slot.start}</Moment>
+                {" - "}
+                <Moment format="HH:mm">{slot.end}</Moment>
+              </h3>
+              { new Date(slot.start) < new Date() ?
+              <p>
+                Débutait{" "}
+                <Moment locale="fr" fromNow>
+                  {slot.start}
+                </Moment>
+              </p>
+              :
+              <p>
+                Commence{" "}
+                <Moment locale="fr" fromNow>
+                  {slot.start}
+                </Moment>
+              </p>
+              }
+            </KimonoNavBox>
+          );
+          
+        })}
+        </>
+        }
       <KimonoCenter width={"80%"}>
         <h1>AlLlllLOooO??? 🤙🤙🤙</h1>
         <h3>
@@ -29,7 +85,7 @@ export default function Allos() {
         <>
           {allos.map((allo, index) => (
             <KimonoNavBox
-              className={allo.price > 0 ? "success-bg" : "danger-bg"}
+              className={!allo.hasSlots ? "success-bg" : "danger-bg"}
               icon={"📱"}
               key={index}
               to={`/allos/${allo.id}`}
@@ -38,23 +94,24 @@ export default function Allos() {
                 <KimonoButtons>
                   <KimonoAuthLink
                     onClick={(e) => {
-                      if (allo.price === 0) {
+                      if (!allo.hasSlots) {
                         e.preventDefault();
                         e.stopPropagation();
-                        window.location.href = `tel:0695450345`;
+                        window.location.href = `tel:+33${allo.phone}`;
                       }
                     }}
                     to={`/allos/${allo.id}/slots`}
-                    className={allo.price > 0 ? "success-bg" : "danger-bg"}
+                    className={!allo.hasSlots ? "success-bg" : "danger-bg"}
                   >
-                    {allo.price > 0 ? "🍽️ Réserver" : "Voir le numéro"}
+                    {allo.hasSlots ? "🍽️ Réserver" : "Voir le numéro"}
                   </KimonoAuthLink>
                   <KimonoButton>📖 + d'informations</KimonoButton>
                 </KimonoButtons>
               }
-              footer={allo.price > 0 && <h3>💰 {allo.price} €</h3>}
+              footer={!allo.free && <h3>Cotisation demandée</h3>}
             >
               <p>{allo.description}</p>
+              <KimonoImage img={allo.gif} />
             </KimonoNavBox>
           ))}
         </>

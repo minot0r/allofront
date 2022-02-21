@@ -3,6 +3,10 @@ import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Home/Home";
 import {
+  KimonoAdminRoute,
+  KimonoAuthRoute,
+  KimonoCenter,
+  KimonoLink,
   KimonoModal,
 } from "./Components/Kimono";
 import Cookies from "universal-cookie";
@@ -12,6 +16,11 @@ import Allo from "./Allos/Allo";
 import Account from "./Account/Account";
 import Shortcut from "./Components/Shortcut/Shortcut";
 import Liste from "./Components/Liste/Liste";
+import Admin from "./Admin/Admin";
+import CreateAllo from "./Components/Admin/CreateAllo";
+import Slots from "./Components/Allo/Slots";
+import Reserve from "./Components/Allo/Reserve";
+import RunningSlots from "./Components/Admin/RunningSlots";
 
 const cookies = new Cookies();
 let cookiesAccepted = cookies.get("accept_cookies") !== undefined;
@@ -53,6 +62,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/allos" element={<Allos />} />
           <Route path="/allos/:alloId" element={<Allo />} />
+          <Route path="/allos/:alloId" element={<KimonoAuthRoute to={"/compte"} />} >
+            <Route path="slots" element={<Slots />} />
+            <Route path="reserve/:slotId" element={<Reserve />} />
+          </Route>
           <Route path="/bde" element={<Liste />} />
           <Route
             path="/compte"
@@ -60,6 +73,21 @@ function App() {
               <Account />
             }
           />
+          <Route path="/admin" element={<KimonoAdminRoute />} >
+            <Route index element={<Admin />} />
+            <Route path="createallo" element={<CreateAllo />} />
+            <Route path="current" element={<RunningSlots />} />
+          </Route>
+          <Route path="*" element={
+            <KimonoCenter width={"80%"} style={{textAlign: "center"}}>
+              <h1>👷 4️0️4️</h1>
+              <h2>Page non trouvée</h2>
+              <KimonoLink to="/" className={"success-bg"}>
+                Retourner à l'accueil
+              </KimonoLink>
+            </KimonoCenter>
+          }>
+          </Route>
         </Routes>
         <Shortcut />
       </div>

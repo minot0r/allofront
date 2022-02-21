@@ -10,7 +10,7 @@ export default function Shortcut() {
   let user = useSelector((state) => state.auth.user);
   const color = loggedIn ? "transparent-bg" : "danger-bg";
   return (
-    <div className={"shortcut-container" + (path === "compte" ? " hidden" : "")}>
+    <div className={"shortcut-container" + (path === "compte" || path === "admin" ? " hidden" : "")}>
       <KimonoLink className={color} to={"/compte"}>
         {loggedIn ? `🧑 ${user.name.split(" ")[0]}` : "🔑 Connexion"}
       </KimonoLink>
