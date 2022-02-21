@@ -120,6 +120,10 @@
     color: black;
 }
 
+.kimono-box.reverse {
+    transform: rotateY(180deg);
+}
+
 .kimono-box.no-margin {
     margin: 0;
     width: 100%;

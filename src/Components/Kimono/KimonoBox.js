@@ -9,13 +9,14 @@ export default function KimonoBox(props) {
     footer,
     buttons,
     noMargin,
+    reverse,
     ...otherProps
   } = props;
 
   return (
     <div
       className={
-        "kimono-box " + (className ?? "") + (noMargin ? " no-margin" : "")
+        "kimono-box " + (className ?? "") + (noMargin ? " no-margin" : "") + (reverse ? " reverse" : "")
       }
       {...otherProps}
     >
