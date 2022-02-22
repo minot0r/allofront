@@ -102,6 +102,7 @@
 .kimono-image img {
     width: 100%;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .kimono-box {
@@ -129,9 +130,21 @@
     width: 100%;
 }
 
-.kimono-box-container {
+.kimono-box.reverse .kimono-box-container {
+    display: none;
+}
+
+.kimono-box:not(.reverse) .kimono-box-reverse-container {
+    display: none;
+}
+
+.kimono-box-container, .kimono-box-reverse-container {
     width: calc(100% - 40px);
     padding: 20px;
+}
+
+.kimono-box.reverse .kimono-box-reverse-container {
+    transform: rotateY(180deg);
 }
 
 .kimono-box:hover {
@@ -174,6 +187,10 @@
     background: white;
     color: black;
     border-radius: 0px 0px 15px 15px;
+}
+
+.reverse .kimono-box-footer {
+    transform: rotateY(180deg);
 }
 
 .kimono-joke {
