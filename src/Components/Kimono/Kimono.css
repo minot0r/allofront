@@ -141,6 +141,7 @@
 .kimono-box-container, .kimono-box-reverse-container {
     width: calc(100% - 40px);
     padding: 20px;
+    background-image: url('./cloudsw.png');
 }
 
 .kimono-box.reverse .kimono-box-reverse-container {
