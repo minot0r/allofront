@@ -35,7 +35,7 @@ export default function EditAllo() {
 
   const dispatch = useDispatch();
 
-  const loading = useSelector((state) => state.allos.loading);
+  const loading =  useSelector((state) => state.allos.loading);
   const allos = useSelector((state) => state.allos.allos);
   const token = useSelector((state) => state.auth.token);
 
@@ -50,7 +50,7 @@ export default function EditAllo() {
     setPrice(allo.price);
     setWithSlots(!allo.free || slots.length > 0);
     setSlots(
-      slots || [
+      slots.length > 0 ? slots : [
         {
           start: new Date(),
           end: new Date(+new Date() + 1000 * 60 * 60),

@@ -14,9 +14,7 @@ export default function KimonoLoading(props) {
   }
   return (
     <div className={"kimono-loading " + (className || "")} {...rest}>
-      <Lottie options={options}>
-
-      </Lottie>
+      <Lottie options={options} />
     </div>
   );
 }

@@ -1,15 +1,35 @@
 import {
   KimonoButtons,
+  KimonoButton,
   KimonoLink,
   KimonoNavBox,
-  KimonoJoke,
+  KimonoCenter,
 } from "../Components/Kimono";
+import { Random } from "react-animated-text";
 import "./Home.css";
 
 export default function Home() {
   return (
     <div className="home-container">
-      <KimonoJoke />
+      <KimonoCenter style={{textAlign: "center"}} width="80%">
+        <h1 style={{ fontSize: '2.25rem' }} className="primary">
+          <Random
+            text={"Kimonodevie"}
+            iterations={1}
+            effect="verticalFadeIn"
+            effectChange={2}
+            effectDirection="up"
+          />
+        </h1>
+        <h2 className="success">
+          Une liste prête a tout pour vous ✨
+        </h2>
+        <KimonoButton className="danger-bg" onClick={() => {
+          window.location.href = "https://instagram.com/kimonodvie";
+        }}>
+          Suivez-nous sur Instagram 💖
+        </KimonoButton>
+      </KimonoCenter>
       <KimonoNavBox className={"success-bg"} title="Allos 📳" to={"/allos"}>
         <p>Découvrir les allos que vous propose notre liste 📲</p>
       </KimonoNavBox>

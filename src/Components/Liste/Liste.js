@@ -1,250 +1,249 @@
-import { useState } from 'react';
-import { KimonoBox, KimonoImage } from '../Kimono';
+import { useState } from "react";
+import { KimonoBox, KimonoCenter, KimonoImage, KimonoJoke } from "../Kimono";
 import "./Liste.css";
 
 export default function Liste() {
-    const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
-    return <div className="liste-container">
-        <KimonoBox 
+  const getRandomColor = () => {
+    const colors = ["success-bg", "warning-bg", "danger-bg", "primary-bg"];
+    return colors[Math.floor(Math.random() * colors.length)];
+  };
+
+  return (
+    <div className="liste-container">
+      <KimonoJoke />
+      <KimonoCenter width={"80%"}>
+        <h1 className="primary-bg">Nos membres</h1>
+        <h3 className="primary">
+          Retrouve tes samuraï préférés et dédiés à toi 😏
+        </h3>
+      </KimonoCenter>
+      <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={
-            <h4>Président de réserve</h4>
-        }
+        footer={<h4>Président de réserve</h4>}
         rchildren={
-            <>
-                <p>Le plus grand pirate de tout les temps</p>
-            </>
+          <>
+            <p>Le plus grand pirate de tout les temps</p>
+          </>
         }
-        className={"primary-bg"}>
-            <h3>Valentin Giorgetti</h3>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <KimonoImage img={'../../logo.png'} />
-        </KimonoBox>
-        <KimonoBox 
+        className={getRandomColor()}
+      >
+        <h3>Valentin Giorgetti</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <KimonoImage img={"../../logo.png"} />
+      </KimonoBox>
+      <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={
-            <h4>Responsable organisation</h4>
-        }
+        footer={<h4>Responsable organisation</h4>}
         rchildren={
-            <>
-                <p>Le plus grand bg de tout les temps</p>
-            </>
+          <>
+            <p>Le plus grand bg de tout les temps</p>
+          </>
         }
-        className={"primary-bg"}>
-            <h3>Younes Saadaoui</h3>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <KimonoImage img={'../../logo.png'} />
-        </KimonoBox>
-        <KimonoBox 
+        className={getRandomColor()}
+      >
+        <h3>Younes Saadaoui</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <KimonoImage img={"../../logo.png"} />
+      </KimonoBox>
+      <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={
-            <h4>Président</h4>
-        }
+        footer={<h4>Président</h4>}
         rchildren={
-            <>
-                <p>Le meilleur président de tout les temps</p>
-            </>
+          <>
+            <p>Le meilleur président de tout les temps</p>
+          </>
         }
-        className={"primary-bg"}>
-            <h3>Némo Demarquay</h3>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <KimonoImage img={'../../logo.png'} />
-        </KimonoBox>
-        <KimonoBox 
+        className={getRandomColor()}
+      >
+        <h3>Némo Demarquay</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <KimonoImage img={"../../logo.png"} />
+      </KimonoBox>
+      <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={
-            <h4>Vice-Président</h4>
-        }
+        footer={<h4>Vice-Président</h4>}
         rchildren={
-            <>
-                <p>Le meilleur vice-président de tout les temps</p>
-            </>
+          <>
+            <p>Le meilleur vice-président de tout les temps</p>
+          </>
         }
-        className={"primary-bg"}>
-            <h3>Guillaume Gros</h3>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <KimonoImage img={'../../logo.png'} />
-        </KimonoBox>
-        <KimonoBox 
+        className={getRandomColor()}
+      >
+        <h3>Guillaume Gros</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <KimonoImage img={"../../logo.png"} />
+      </KimonoBox>
+      <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={
-            <h4>Trésorier</h4>
-        }
+        footer={<h4>Trésorier</h4>}
         rchildren={
-            <>
-                <p>L'argent, c'est son élément</p>
-            </>
+          <>
+            <p>L'argent, c'est son élément</p>
+          </>
         }
-        className={"primary-bg"}>
-            <h3>Alban Godart</h3>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <KimonoImage img={'../../logo.png'} />
-        </KimonoBox>
-        <KimonoBox 
+        className={getRandomColor()}
+      >
+        <h3>Alban Godart</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <KimonoImage img={"../../logo.png"} />
+      </KimonoBox>
+      <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={
-            <h4>Vice-Trésorier</h4>
-        }
+        footer={<h4>Vice-Trésorier</h4>}
         rchildren={
-            <>
-                <p>Avec lui, on est jamais perdant</p>
-            </>
+          <>
+            <p>Avec lui, on est jamais perdant</p>
+          </>
         }
-        className={"primary-bg"}>
-            <h3>Lori chahbazian</h3>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <KimonoImage img={'../../logo.png'} />
-        </KimonoBox>
-        <KimonoBox 
+        className={getRandomColor()}
+      >
+        <h3>Lori chahbazian</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <KimonoImage img={"../../logo.png"} />
+      </KimonoBox>
+      <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={
-            <h4>Responsable Danse?</h4>
-        }
+        footer={<h4>Responsable Danse?</h4>}
         rchildren={
-            <>
-                <p>La meilleure danseuse de tout les temps</p>
-            </>
+          <>
+            <p>La meilleure danseuse de tout les temps</p>
+          </>
         }
-        className={"primary-bg"}>
-            <h3>Lisa Ginestet</h3>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <KimonoImage img={'../../logo.png'} />
-        </KimonoBox>
-        <KimonoBox 
+        className={getRandomColor()}
+      >
+        <h3>Lisa Ginestet</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <KimonoImage img={"../../logo.png"} />
+      </KimonoBox>
+      <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={
-            <h4>Membre pôle danse</h4>
-        }
+        footer={<h4>Membre pôle danse</h4>}
         rchildren={
-            <>
-                <p>Champion de France de jeux d'alcool</p>
-            </>
+          <>
+            <p>Champion de France de jeux d'alcool</p>
+          </>
         }
-        className={"primary-bg"}>
-            <h3>Julien Delahaye</h3>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <KimonoImage img={'../../logo.png'} />
-        </KimonoBox>
-        <KimonoBox 
+        className={getRandomColor()}
+      >
+        <h3>Julien Delahaye</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <KimonoImage img={"../../logo.png"} />
+      </KimonoBox>
+      <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={
-            <h4>Membre pôle son</h4>
-        }
+        footer={<h4>Membre pôle son</h4>}
         rchildren={
-            <>
-                <p>Le meilleur des DJ</p>
-            </>
+          <>
+            <p>Le meilleur des DJ</p>
+          </>
         }
-        className={"primary-bg"}>
-            <h3>Victor Leblanc</h3>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <KimonoImage img={'../../logo.png'} />
-        </KimonoBox>
-        <KimonoBox 
+        className={getRandomColor()}
+      >
+        <h3>Victor Leblanc</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <KimonoImage img={"../../logo.png"} />
+      </KimonoBox>
+      <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={
-            <h4>(vraie)Responsable organisation</h4>
-        }
+        footer={<h4>(vraie)Responsable organisation</h4>}
         rchildren={
-            <>
-                <p>Elle fait les meilleurs CR de réunions</p>
-            </>
+          <>
+            <p>Elle fait les meilleurs CR de réunions</p>
+          </>
         }
-        className={"primary-bg"}>
-            <h3>Anouck Bruguière</h3>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <KimonoImage img={'../../logo.png'} />
-        </KimonoBox>
-        <KimonoBox 
+        className={getRandomColor()}
+      >
+        <h3>Anouck Bruguière</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <KimonoImage img={"../../logo.png"} />
+      </KimonoBox>
+      <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={
-            <h4>Membre pôle communication</h4>
-        }
+        footer={<h4>Membre pôle communication</h4>}
         rchildren={
-            <>
-                <p>Le montage vidéo, c'est son élément</p>
-            </>
+          <>
+            <p>Le montage vidéo, c'est son élément</p>
+          </>
         }
-        className={"primary-bg"}>
-            <h3>Zakaria Belbali</h3>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <KimonoImage img={'../../logo.png'} />
-        </KimonoBox>
-        <KimonoBox 
+        className={getRandomColor()}
+      >
+        <h3>Zakaria Belbali</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <KimonoImage img={"../../logo.png"} />
+      </KimonoBox>
+      <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={
-            <h4>Responsable cuisine</h4>
-        }
+        footer={<h4>Responsable cuisine</h4>}
         rchildren={
-            <>
-                <p>On a jamais faim avec lui</p>
-            </>
+          <>
+            <p>On a jamais faim avec lui</p>
+          </>
         }
-        className={"primary-bg"}>
-            <h3>Alexandre Desbourdelles</h3>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <KimonoImage img={'../../logo.png'} />
-        </KimonoBox>
-        <KimonoBox 
+        className={getRandomColor()}
+      >
+        <h3>Alexandre Desbourdelles</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <KimonoImage img={"../../logo.png"} />
+      </KimonoBox>
+      <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={
-            <h4>Membre pôle son</h4>
-        }
+        footer={<h4>Membre pôle son</h4>}
         rchildren={
-            <>
-                <p>Le meilleur mixeur de tout les temps</p>
-            </>
+          <>
+            <p>Le meilleur mixeur de tout les temps</p>
+          </>
         }
-        className={"primary-bg"}>
-            <h3>Baptiste Morée</h3>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <KimonoImage img={'../../logo.png'} />
-        </KimonoBox>
-        <KimonoBox 
+        className={getRandomColor()}
+      >
+        <h3>Baptiste Morée</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <KimonoImage img={"../../logo.png"} />
+      </KimonoBox>
+      <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={
-            <h4>Membre pôle cuisine</h4>
-        }
+        footer={<h4>Membre pôle cuisine</h4>}
         rchildren={
-            <>
-                <p>Elle prépare les meilleirs gyozas</p>
-            </>
+          <>
+            <p>Elle prépare les meilleirs gyozas</p>
+          </>
         }
-        className={"primary-bg"}>
-            <h3>Camille Urban</h3>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <KimonoImage img={'../../logo.png'} />
-        </KimonoBox>
-        <KimonoBox 
+        className={getRandomColor()}
+      >
+        <h3>Camille Urban</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <KimonoImage img={"../../logo.png"} />
+      </KimonoBox>
+      <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={
-            <h4>Membre pôle son</h4>
-        }
+        footer={<h4>Membre pôle son</h4>}
         rchildren={
-            <>
-                <p>Le plus grand pirate de tout les temps</p>
-            </>
+          <>
+            <p>Le plus grand pirate de tout les temps</p>
+          </>
         }
-        className={"primary-bg"}>
-            <h3>Thomas Veau</h3>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <KimonoImage img={'../../logo.png'} />
-        </KimonoBox>
+        className={getRandomColor()}
+      >
+        <h3>Thomas Veau</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <KimonoImage img={"../../logo.png"} />
+      </KimonoBox>
     </div>
+  );
 }
