@@ -18,6 +18,7 @@ import KimonoAuthLink from "./KimonoAuthLink";
 import KimonoAuthRoute from "./KimonoAuthRoute";
 import KimonoAdminRoute from "./KimonoAdminRoute";
 import KimonoSwitch from "./KimonoSwitch";
+import KimonoSelect from "./KimonoSelect";
 
 export {
   KimonoInput,
@@ -40,4 +41,5 @@ export {
   KimonoAuthRoute,
   KimonoAdminRoute,
   KimonoSwitch,
+  KimonoSelect,
 };

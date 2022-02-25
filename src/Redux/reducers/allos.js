@@ -14,6 +14,8 @@ const VALIDATE_SLOT = "allos/ValidateSlot";
 const GET_RESERVED_SLOTS = "allos/GetReservedSlots";
 const GET_RUNNING_SLOTS = "allos/GetRunningSlots";
 const CREATE_ALLO = "allos/CreateAllo";
+const EDIT_ALLO = "allos/EditAllo";
+const DELETE_ALLO = "allos/DeleteAllo";
 
 export {
   ALL_ALLOS,
@@ -123,6 +125,17 @@ export const allosReducer = (state = initialState, action) => {
         loading: false,
       };
       break;
+    case EDIT_ALLO:
+      state = {
+        ...state,
+        loading: false,
+      };
+      break;
+    case DELETE_ALLO:
+      state = {
+        ...state,
+        loading: false,
+      };
   }
   return state;
 };
@@ -380,6 +393,67 @@ export function getRunningSlots() {
     dispatch({
       type: GET_RUNNING_SLOTS,
       payload: response.slots,
+    });
+  };
+}
+
+export function editAllo(allo) {
+  return async (dispatch, getState) => {
+    dispatch({ type: LOADING, payload: true });
+    const state = getState();
+    const response = await AllosService.editAllo(
+      allo,
+      state.auth.token,
+    );
+    if (!response.success) {
+      dispatch({
+        type: ADD_NOTIFICATION,
+        payload: createMessage(
+          "Impossible de modifier l'allô 😢",
+          "Réessaye plus tard",
+          { type: "danger", duration: 5000 }
+        ),
+      });
+      return;
+    }
+    dispatch({
+      type: EDIT_ALLO,
+    });
+    dispatch({
+      type: ADD_NOTIFICATION,
+      payload: createMessage("Allo modifié avec succès 😎", "", {
+        type: "success",
+        duration: 5000,
+      }),
+    });
+  };
+}
+
+export function deleteAllo(alloId) {
+  return async (dispatch, getState) => {
+    dispatch({ type: LOADING, payload: true });
+    const state = getState();
+    const response = await AllosService.deleteAllo(alloId, state.auth.token);
+    if (!response.success) {
+      dispatch({
+        type: ADD_NOTIFICATION,
+        payload: createMessage(
+          "Impossible de supprimer l'allô 😢",
+          "Réessaye plus tard",
+          { type: "danger", duration: 5000 }
+        ),
+      });
+      return;
+    }
+    dispatch({
+      type: DELETE_ALLO,
+    });
+    dispatch({
+      type: ADD_NOTIFICATION,
+      payload: createMessage("Allo supprimé avec succès 😎", "", {
+        type: "success",
+        duration: 5000,
+      }),
     });
   };
 }

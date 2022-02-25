@@ -24,14 +24,6 @@ export default function Admin() {
         <p>Créer un nouveau allo</p>
       </KimonoNavBox>
       <KimonoNavBox
-        className="success-bg"
-        to="/admin/createslot"
-        title="Créer un nouveau créneau"
-        icon="📝"
-      >
-        <p>Créer un nouveau créneau</p>
-      </KimonoNavBox>
-      <KimonoNavBox
         className="warning-bg"
         to="/admin/editallo"
         title="Modifier un allo"
@@ -39,14 +31,6 @@ export default function Admin() {
         footer={<h3>{allosLength} allos</h3>}
       >
         <p>Modifier/Supprimer un allo</p>
-      </KimonoNavBox>
-      <KimonoNavBox
-        className="warning-bg"
-        to="/admin/editslot"
-        title="Modifier un créneau"
-        icon="📝"
-      >
-        <p>Modifier/Supprimer un créneau</p>
       </KimonoNavBox>
     </div>
   );

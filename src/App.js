@@ -21,6 +21,7 @@ import CreateAllo from "./Components/Admin/CreateAllo";
 import Slots from "./Components/Allo/Slots";
 import Reserve from "./Components/Allo/Reserve";
 import RunningSlots from "./Components/Admin/RunningSlots";
+import EditAllo from "./Components/Admin/EditAllo";
 
 const cookies = new Cookies();
 let cookiesAccepted = cookies.get("accept_cookies") !== undefined;
@@ -76,6 +77,7 @@ function App() {
           <Route path="/admin" element={<KimonoAdminRoute />} >
             <Route index element={<Admin />} />
             <Route path="createallo" element={<CreateAllo />} />
+            <Route path="editallo" element={<EditAllo />} />
             <Route path="current" element={<RunningSlots />} />
           </Route>
           <Route path="*" element={

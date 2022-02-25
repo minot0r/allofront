@@ -166,6 +166,38 @@ const AllosService = {
       .then((response) => {
         return response.data;
       });
+  },
+  editAllo: (allo, token) => {
+    return axiosClient
+      .post(
+        "admin/editAllo",
+        allo,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        return response.data;
+      });
+  },
+  deleteAllo: (alloId, token) => {
+    return axiosClient
+      .post(
+        "admin/deleteAllo",
+        {
+          id: alloId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        return response.data;
+      });
   }
 };
 
