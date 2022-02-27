@@ -22,7 +22,7 @@ export default function Liste() {
       <KimonoBox
         reverse={clicked}
         onClick={() => setClicked(!clicked)}
-        footer={<h4>Président de réserve</h4>}
+        footer={<h4>Chargé de com' et développeur web</h4>}
         rchildren={
           <>
             <p>Le plus grand pirate de tout les temps</p>
@@ -31,7 +31,7 @@ export default function Liste() {
         className={getRandomColor()}
       >
         <h3>Valentin Giorgetti</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h5>AKA Mafiakuza</h5>
         <KimonoImage img={"../../logo.png"} />
       </KimonoBox>
       <KimonoBox
@@ -46,7 +46,7 @@ export default function Liste() {
         className={getRandomColor()}
       >
         <h3>Younes Saadaoui</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h5>AKA Itachibre</h5>
         <KimonoImage img={"../../logo.png"} />
       </KimonoBox>
       <KimonoBox
@@ -61,7 +61,7 @@ export default function Liste() {
         className={getRandomColor()}
       >
         <h3>Némo Demarquay</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h5>AKA Tatamine</h5>
         <KimonoImage img={"../../logo.png"} />
       </KimonoBox>
       <KimonoBox
@@ -76,7 +76,7 @@ export default function Liste() {
         className={getRandomColor()}
       >
         <h3>Guillaume Gros</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h5>Katanarcotique</h5>
         <KimonoImage img={"../../logo.png"} />
       </KimonoBox>
       <KimonoBox
@@ -91,7 +91,7 @@ export default function Liste() {
         className={getRandomColor()}
       >
         <h3>Alban Godart</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h5>AKA Chef Sushit</h5>
         <KimonoImage img={"../../logo.png"} />
       </KimonoBox>
       <KimonoBox
@@ -106,7 +106,7 @@ export default function Liste() {
         className={getRandomColor()}
       >
         <h3>Lori chahbazian</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h5>AKA Ying Yäger Meister</h5>
         <KimonoImage img={"../../logo.png"} />
       </KimonoBox>
       <KimonoBox
@@ -121,7 +121,7 @@ export default function Liste() {
         className={getRandomColor()}
       >
         <h3>Lisa Ginestet</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h5>Princesse monocokée</h5>
         <KimonoImage img={"../../logo.png"} />
       </KimonoBox>
       <KimonoBox
@@ -136,7 +136,7 @@ export default function Liste() {
         className={getRandomColor()}
       >
         <h3>Julien Delahaye</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h5>Chinois de la calle</h5>
         <KimonoImage img={"../../logo.png"} />
       </KimonoBox>
       <KimonoBox
@@ -151,7 +151,7 @@ export default function Liste() {
         className={getRandomColor()}
       >
         <h3>Victor Leblanc</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h5>Nausicaa de la vallée du vin</h5>
         <KimonoImage img={"../../logo.png"} />
       </KimonoBox>
       <KimonoBox
@@ -166,7 +166,7 @@ export default function Liste() {
         className={getRandomColor()}
       >
         <h3>Anouck Bruguière</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h5>AKA Geisharlatan</h5>
         <KimonoImage img={"../../logo.png"} />
       </KimonoBox>
       <KimonoBox
@@ -181,7 +181,7 @@ export default function Liste() {
         className={getRandomColor()}
       >
         <h3>Zakaria Belbali</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h5>AKA Asumatrixé</h5>
         <KimonoImage img={"../../logo.png"} />
       </KimonoBox>
       <KimonoBox
@@ -196,7 +196,7 @@ export default function Liste() {
         className={getRandomColor()}
       >
         <h3>Alexandre Desbourdelles</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h5>AKA Rhum-bô</h5>
         <KimonoImage img={"../../logo.png"} />
       </KimonoBox>
       <KimonoBox
@@ -211,7 +211,7 @@ export default function Liste() {
         className={getRandomColor()}
       >
         <h3>Baptiste Morée</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h5>AKA Jacky Chanvre</h5>
         <KimonoImage img={"../../logo.png"} />
       </KimonoBox>
       <KimonoBox
@@ -226,7 +226,7 @@ export default function Liste() {
         className={getRandomColor()}
       >
         <h3>Camille Urban</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h5>AKA Sakurakaï</h5>
         <KimonoImage img={"../../logo.png"} />
       </KimonoBox>
       <KimonoBox
@@ -241,7 +241,7 @@ export default function Liste() {
         className={getRandomColor()}
       >
         <h3>Thomas Veau</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h5>AKA Sangokuite</h5>
         <KimonoImage img={"../../logo.png"} />
       </KimonoBox>
     </div>
