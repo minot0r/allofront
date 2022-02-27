@@ -9,6 +9,7 @@ import {
   KimonoButton,
   KimonoButtons,
   KimonoCenter,
+  KimonoConstruct,
   KimonoLink,
   KimonoLoading,
   KimonoModal,
@@ -44,7 +45,7 @@ export default function Slots() {
     if (!slots || !username) return false;
     return slots.find((slot) => slot.reservedBy === username);
   };
-
+  if (new Date() < new Date("2022-02-28")) return <KimonoConstruct />
   if (loading) return <KimonoLoading />;
   return (
     <>
@@ -109,7 +110,7 @@ export default function Slots() {
                     .filter((slot) => new Date(slot.start) > new Date())
                     .sort((a, b) => new Date(a.start) - new Date(b.start))
                     .map((slot, index) => {
-                      
+
                       return (
                         <KimonoBox
                           key={index}
@@ -117,8 +118,8 @@ export default function Slots() {
                             slot.validated
                               ? "danger-bg"
                               : slot.reservedBy !== null
-                              ? "warning-bg"
-                              : "success-bg"
+                                ? "warning-bg"
+                                : "success-bg"
                           }
                           title={`Créneau n°${index + 1}`}
                           footer={
@@ -131,7 +132,7 @@ export default function Slots() {
                           buttons={
                             <KimonoButtons>
                               {slot.reservedBy === username &&
-                              !slot.validated ? (
+                                !slot.validated ? (
                                 <>
                                   <KimonoLink
                                     className="success-bg"
