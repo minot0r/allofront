@@ -14,7 +14,7 @@ export default function Home() {
       <KimonoCenter style={{textAlign: "center"}} width="80%">
         <h1 style={{ fontSize: '2.25rem' }} className="primary">
           <Random
-            text={"Kimonodevie"}
+            text={"Kimonodvie"}
             iterations={1}
             effect="verticalFadeIn"
             effectChange={2}
@@ -25,7 +25,7 @@ export default function Home() {
           Une liste prête a tout pour vous ✨
         </h2>
         <KimonoButton className="danger-bg" onClick={() => {
-          window.location.href = "https://instagram.com/kimonodvie";
+          window.location.href = "https://instagram.com/kimonodvie2023";
         }}>
           Suivez-nous sur Instagram 💖
         </KimonoButton>
