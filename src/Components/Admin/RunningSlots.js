@@ -35,6 +35,10 @@ export default function RunningSlots() {
                   <KimonoButton
                     className="success-bg"
                     onClick={() => {
+                      if(new Date() < new Date("2022-03-05")) {
+                        alert("Cet allo n'est pas encore disponible, il sera disponible le 5 mars 2022");
+                        return;
+                      }
                       window.location.href = `tel:${slot.phone}`;
                     }}
                   >
