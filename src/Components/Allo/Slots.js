@@ -43,9 +43,8 @@ export default function Slots() {
 
   const hasSlot = () => {
     if (!slots || !username) return false;
-    return slots.find((slot) => slot.reservedBy === username);
+    return slots.find((slot) => slot.reservedBy === username && !slot.validated);
   };
-  if (new Date() < new Date("2022-02-28")) return <KimonoConstruct />
   if (loading) return <KimonoLoading />;
   return (
     <>
