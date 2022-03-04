@@ -9,7 +9,6 @@ import {
   KimonoButton,
   KimonoButtons,
   KimonoCenter,
-  KimonoConstruct,
   KimonoLink,
   KimonoLoading,
   KimonoModal,
