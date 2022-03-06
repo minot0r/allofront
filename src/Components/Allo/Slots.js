@@ -91,6 +91,7 @@ export default function Slots() {
             <h1>Créneaux disponibles</h1>
           </KimonoCenter>
           {slots
+            .sort((a, b) => new Date(a.start) - new Date(b.start))
             .reduce((acc, slot) => {
               const day = new Date(slot.start).getDay();
               if (acc.indexOf(day) === -1) {

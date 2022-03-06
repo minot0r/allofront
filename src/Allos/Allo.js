@@ -27,16 +27,11 @@ export default function Allo() {
         <>
           <h1 className={color}>{allo.name}</h1>
           <h3>{allo.description}</h3>
-          {!allo.free ? (
+          {!allo.free && (
             <p className={color}>
               Cet allo demande une cotisation, cela signifie qu'il faut réserver
               pour pouvoir participer et verser une petite aide financière pour
               alléger les dépenses de la liste 💖
-            </p>
-          ) : (
-            <p className={color}>
-              Cet allo est gratuit. YOUHOU ! Appelle le numéro dès maintenant
-              pour accèder à l'allo.
             </p>
           )}
           {allo.hasSlots && (

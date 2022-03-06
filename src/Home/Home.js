@@ -22,7 +22,7 @@ export default function Home() {
           />
         </h1>
         <h2 className="success">
-          Une liste prête a tout pour vous ✨
+          Une liste prête à tout pour vous ✨
         </h2>
         <KimonoButton className="danger-bg" onClick={() => {
           window.location.href = "https://instagram.com/kimonodvie2023";
