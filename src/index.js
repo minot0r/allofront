@@ -27,7 +27,7 @@ if(admin) {
 }
 
 const stripePromise = loadStripe(
-  "pk_test_51KUC4VLla50ZhlMdBKh469zO3gpvgOpue8VKyElY4WpYEtITPrD1c2iiQT00p48F4kqJ5qmh7ESfCdsD7vKf16KM00Eri828Az"
+  "pk_live_51KUC4VLla50ZhlMdr17OLoMKU8XHMlKmtnb5zmfOq2mufiaLMJhm5iU2STfl1SUNj3Z5x8EY8Tt9W1h6fHUpeFeD00V7s1WFlM"
 );
 
 ReactDOM.render(
