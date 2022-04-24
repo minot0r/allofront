@@ -22,6 +22,8 @@ import Slots from "./Components/Allo/Slots";
 import Reserve from "./Components/Allo/Reserve";
 import RunningSlots from "./Components/Admin/RunningSlots";
 import EditAllo from "./Components/Admin/EditAllo";
+import VendreDJ from "./Vendredj/Vendredj";
+import VendredjApplications from "./Components/Admin/VendredjApplications";
 
 const cookies = new Cookies();
 let cookiesAccepted = cookies.get("accept_cookies") !== undefined;
@@ -63,33 +65,35 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/allos" element={<Allos />} />
           <Route path="/allos/:alloId" element={<Allo />} />
-          <Route path="/allos/:alloId" element={<KimonoAuthRoute to={"/compte"} />} >
+          <Route
+            path="/allos/:alloId"
+            element={<KimonoAuthRoute to={"/compte"} />}
+          >
             <Route path="slots" element={<Slots />} />
             <Route path="reserve/:slotId" element={<Reserve />} />
           </Route>
           <Route path="/bde" element={<Liste />} />
-          <Route
-            path="/compte"
-            element={
-              <Account />
-            }
-          />
-          <Route path="/admin" element={<KimonoAdminRoute />} >
+          <Route path="/compte" element={<Account />} />
+          <Route path="/admin" element={<KimonoAdminRoute />}>
             <Route index element={<Admin />} />
             <Route path="createallo" element={<CreateAllo />} />
             <Route path="editallo" element={<EditAllo />} />
             <Route path="current" element={<RunningSlots />} />
+            <Route path="vendredj" element={<VendredjApplications />} />
           </Route>
-          <Route path="*" element={
-            <KimonoCenter width={"80%"} style={{textAlign: "center"}}>
-              <h1>👷 4️0️4️</h1>
-              <h2>Page non trouvée</h2>
-              <KimonoLink to="/" className={"success-bg"}>
-                Retourner à l'accueil
-              </KimonoLink>
-            </KimonoCenter>
-          }>
-          </Route>
+          <Route
+            path="*"
+            element={
+              <KimonoCenter width={"80%"} style={{ textAlign: "center" }}>
+                <h1>👷 4️0️4️</h1>
+                <h2>Page non trouvée</h2>
+                <KimonoLink to="/" className={"success-bg"}>
+                  Retourner à l'accueil
+                </KimonoLink>
+              </KimonoCenter>
+            }
+          ></Route>
+          <Route path="/vendredj" element={<VendreDJ />} />
         </Routes>
         <Shortcut />
       </div>

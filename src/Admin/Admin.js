@@ -6,6 +6,15 @@ export default function Admin() {
   const runningSlots = useSelector((state) => state.allos.runningSlots);
   return (
     <div>
+      {" "}
+      <KimonoNavBox
+        className={"danger-bg"}
+        to={"/admin/vendredj"}
+        title={"Voir les inscriptions au Vendredj"}
+        icon={"🏃"}
+      >
+        <p>Voir les créneaux en cours ({runningSlots.length})</p>
+      </KimonoNavBox>
       <KimonoNavBox
         className={"danger-bg"}
         to={"/admin/current"}

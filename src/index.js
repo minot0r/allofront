@@ -15,6 +15,7 @@ import App from "./App";
 
 import { getAllos, getRunningSlots } from "./Redux/reducers/allos";
 import ScrollTop from "./ScrollTop";
+import { getApplications } from "./Redux/reducers/vendredj";
 
 const state = store.getState();
 const loggedIn = state.auth.loggedIn;
@@ -24,6 +25,7 @@ store.dispatch(getAllos(loggedIn));
 
 if(admin) {
   store.dispatch(getRunningSlots());
+  store.dispatch(getApplications(state.auth.token));
 }
 
 const stripePromise = loadStripe(

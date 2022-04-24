@@ -29,6 +29,9 @@ export default function Home() {
         }}>
           Suivez-nous sur Instagram 💖
         </KimonoButton>
+        <KimonoLink className="danger-bg" to={"/vendredj"}>
+          S'inscrire au VendreDj 💿
+        </KimonoLink>
       </KimonoCenter>
       <KimonoNavBox className={"success-bg"} title="Allos 📳" to={"/allos"}>
         <p>Découvrir les allos que vous propose notre liste 📲</p>

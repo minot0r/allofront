@@ -237,6 +237,41 @@
     fill: transparent;
 }
 
+.kimono-collapsible {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 40px);
+    margin: 20px 20px;
+    text-decoration: none;
+    user-select: none;
+    align-items: center;
+}
+
+.kimono-collapsible-header {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #647191;
+    color: white;
+    padding: 10px 20px;
+    -webkit-box-shadow: 1px 2px 9px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 2px 9px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    width: 100%;
+}
+
+.kimono-collapsible-content {
+    overflow: hidden;
+    max-height: 500px;
+    transition: max-height .5s ease-out;
+    width: calc(100% - 40px);
+}
+
+.kimono-collapsible.collapsed .kimono-collapsible-content {
+    max-height: 0px;
+}
+
 @keyframes animateSVG {
     0% {
         fill: transparent;
