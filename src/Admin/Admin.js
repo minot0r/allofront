@@ -8,12 +8,11 @@ export default function Admin() {
     <div>
       {" "}
       <KimonoNavBox
-        className={"danger-bg"}
+        className={"primary-bg"}
         to={"/admin/vendredj"}
         title={"Voir les inscriptions au Vendredj"}
-        icon={"🏃"}
+        icon={""}
       >
-        <p>Voir les créneaux en cours ({runningSlots.length})</p>
       </KimonoNavBox>
       <KimonoNavBox
         className={"danger-bg"}
