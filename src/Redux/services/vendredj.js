@@ -12,7 +12,7 @@ const axiosClient = axios.create({
 const VendredjService = {
     registerForm(name, instagram, musicType) {
         return axiosClient
-            .post('/vendredj/register', {
+            .post('vendredj/register', {
                 name,
                 instagram,
                 musicType,
@@ -23,7 +23,7 @@ const VendredjService = {
     },
     getApplications(token) {
         return axiosClient
-            .get('/admin/applications', {
+            .get('admin/applications', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

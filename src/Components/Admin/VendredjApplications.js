@@ -10,7 +10,7 @@ export default function VendredjApplications() {
   return applications.map((app) => {
     return (
       <KimonoBox className="success-bg" title={app.name}>
-        <p>{app.instagram.startsWith("@") ? "" : "@" + app.instagram}</p>
+        <p>{(app.instagram.startsWith("@") ? "" : "@") + app.instagram}</p>
         <p>Mixe : {app.musicType}</p>
       </KimonoBox>
     );

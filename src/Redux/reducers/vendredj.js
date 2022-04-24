@@ -90,16 +90,17 @@ export function getApplications(token) {
       const response = await VendredjService.getApplications(token);
       dispatch({
         type: GET_APPLICATIONS,
-        payload: response.data.applications,
+        payload: response.applications,
       });
     } catch (error) {
+        console.error(error)
       dispatch({
         type: ADD_NOTIFICATION,
         payload: createMessage(
           "Oups !",
           "Une erreur est survenue, veuillez réessayer plus tard.",
           {
-            type: "error",
+            type: "danger",
             duration: 5000,
           }
         ),
