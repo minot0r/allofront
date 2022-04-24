@@ -29,7 +29,7 @@ export default function Home() {
         }}>
           Suivez-nous sur Instagram 💖
         </KimonoButton>
-        <KimonoLink className="danger-bg" to={"/vendredj"}>
+        <KimonoLink className="primary-bg" to={"/vendredj"}>
           S'inscrire au VendreDj 💿
         </KimonoLink>
       </KimonoCenter>
