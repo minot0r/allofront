@@ -10,15 +10,20 @@ import {
   KimonoSubmit,
 } from "../Components/Kimono";
 import { registerForm } from "../Redux/reducers/vendredj";
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
 
 export default function VendreDJ() {
   const [name, setName] = useState("");
   const [instagram, setInstagram] = useState("");
   const [music, setMusic] = useState("");
+  const [sent, setSent] = useState(false);
 
   const dispatch = useDispatch();
 
   const loading = useSelector((state) => state.vendredj.loading);
+
+  const { width, height } = useWindowSize();
 
   return (
     <>
@@ -75,6 +80,7 @@ export default function VendreDJ() {
           onSubmit={(e) => {
             e.preventDefault();
             dispatch(registerForm(name, instagram, music));
+            setSent(true);
           }}
         >
           <KimonoInput
@@ -105,11 +111,15 @@ export default function VendreDJ() {
             instagram.length > 0 &&
             music.length > 0 &&
             !loading && (
-              <KimonoSubmit className={"success-bg"} value={"Envoyer le formulaire 🤓"} />
+              <KimonoSubmit
+                className={"success-bg"}
+                value={"Envoyer le formulaire 🤓"}
+              />
             )}
           {loading && <KimonoLoading />}
         </form>
       </KimonoCenter>
+      {sent && <Confetti width={width} height={height} />}
     </>
   );
 }
